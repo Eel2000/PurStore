@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:PureStore.App.Views.Desktop"
+       x:Class="PureStore.App.DesktopShell"
+       Shell.FlyoutWidth="60" Shell.FlyoutBehavior="Locked"
+       Title="DesktopShell">
+
+    <!--<Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid>
+                <Path HeightRequest="20"
+                      WidthRequest="20"
+                      Data=""
+                      HorizontalOptions="Start"
+                      VerticalOptions="Center"
+                      Margin="2,0,0,0"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>-->
+
+    <ShellContent
+        Title="Home"
+        Icon="{FontImage &#xf30c;, FontFamily=Ionicons, Size=44}"
+        ContentTemplate="{DataTemplate views:DesktopHome}"
+        Route="dtHome" />
+
+</Shell>

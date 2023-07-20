@@ -6,7 +6,11 @@
         {
             InitializeComponent();
 
+#if WINDOWS
+            MainPage = new DesktopShell();
+#else
             MainPage = new AppShell();
+#endif
         }
     }
 }
