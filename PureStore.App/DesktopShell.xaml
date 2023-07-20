@@ -3,7 +3,8 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:PureStore.App.Views.Desktop"
        x:Class="PureStore.App.DesktopShell"
-       Shell.FlyoutWidth="60" Shell.FlyoutBehavior="Locked"
+       Shell.FlyoutWidth="60" Shell.FlyoutBehavior="Locked" 
+       Shell.ForegroundColor="DarkBlue"
        Title="DesktopShell">
 
     <!--<Shell.ItemTemplate>
@@ -21,7 +22,7 @@
 
     <ShellContent
         Title="Home"
-        Icon="{FontImage &#xf30c;, FontFamily=Ionicons, Size=44}"
+        Icon="{FontImage &#xf015;, FontFamily=faSolid, Size=44}"
         ContentTemplate="{DataTemplate views:DesktopHome}"
         Route="dtHome" />
 
