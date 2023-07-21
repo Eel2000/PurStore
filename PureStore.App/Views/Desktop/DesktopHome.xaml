@@ -27,7 +27,7 @@
                         <VisualState x:Name="Touched">
                             <VisualState.Setters>
                                 <Setter Property="Scale" Value="0.1"/>
-                                <Setter Property="BorderColor" Value="{DynamicResource Yellow100Accent}"/>
+                                <Setter Property="BorderColor" Value="{x:DynamicResource Yellow100Accent}"/>
                                 <Setter Property="HasShadow" Value="False"/>
                             </VisualState.Setters>
                         </VisualState>
@@ -66,7 +66,7 @@
                 </Frame>
             </Grid>
 
-            <CollectionView Grid.Row="3" ItemsSource="{Binding Apps}" Margin="15,60,25,0"
+            <CollectionView Grid.Row="3" ItemsSource="{Binding Apps}" Margin="15,50,25,0"
                             HorizontalScrollBarVisibility="Never">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
@@ -74,7 +74,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:ItemApp">
                         <Frame x:Name="itemFram" CornerRadius="10" Style="{StaticResource HoverFrameStyle}"
-                           HeightRequest="260" WidthRequest="180" IsClippedToBounds="True" BorderColor="Transparent"
+                           HeightRequest="260" WidthRequest="150" IsClippedToBounds="True" BorderColor="Transparent"
                                BackgroundColor="WhiteSmoke" HasShadow="True">
                             <Frame.GestureRecognizers>
                                 <PointerGestureRecognizer PointerEntered="PointerGestureRecognizer_PointerEntered"
