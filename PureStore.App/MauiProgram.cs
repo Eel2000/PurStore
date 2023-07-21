@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using PureStore.App.ViewModels;
+using PureStore.App.Views.Desktop;
 
 namespace PureStore.App
 {
@@ -21,6 +24,14 @@ namespace PureStore.App
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+
+            #region desktop registration
+            //--------------pages & viewModels-------------//
+            builder.Services.AddTransient<DesktopHome>();
+            builder.Services.AddTransient<DesktopHomeViewModel>();
+
+            //--------------------------------------------//
+            #endregion
 
             return builder.Build();
         }
