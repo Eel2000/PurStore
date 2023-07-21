@@ -3,9 +3,9 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:PureStore.App.Views.Desktop"
        x:Class="PureStore.App.DesktopShell"
-       Shell.FlyoutWidth="60" Shell.FlyoutBehavior="Locked" 
-       Shell.ForegroundColor="DarkBlue"
-       Title="DesktopShell">
+       Shell.FlyoutBehavior="Locked" 
+       Shell.ForegroundColor="DarkBlue" FlyoutWidth="60"
+       Title="Desktop Shell" FlyoutBackgroundColor="AliceBlue">
 
     <!--<Shell.ItemTemplate>
         <DataTemplate>
@@ -20,10 +20,32 @@
         </DataTemplate>
     </Shell.ItemTemplate>-->
 
-    <ShellContent
-        Title="Home"
-        Icon="{FontImage &#xf015;, FontFamily=faSolid, Size=44}"
-        ContentTemplate="{DataTemplate views:DesktopHome}"
-        Route="dtHome" />
+
+    <ShellContent Title="Home"
+                  ToolTipProperties.Text="Home page"
+                  Icon="{FontImage &#xf015;, FontFamily=faSolid, Size=50, Color=Red}"
+                  ContentTemplate="{DataTemplate views:DesktopHome}"/>
+
+    <ShellContent Title="Store" 
+                  Icon="{FontImage &#xf07a;, FontFamily=faSolid, Size=44, Color=Red}"
+                  ContentTemplate="{DataTemplate views:ApplicationsStore}"/>
+
+    <ShellContent Title="Downloads" 
+                  Icon="{FontImage &#xf019;, FontFamily=faSolid, Size=44, Color=Red}"
+                  ContentTemplate="{DataTemplate views:Downloaded}"/>
+
+    <ShellContent Title="Favorites" 
+                  Icon="{FontImage &#xf004;, FontFamily=faSolid, Size=44, Color=Red}"
+                  ContentTemplate="{DataTemplate views:Favorites}"/>
+    
+    <ShellContent Title="Uploaded" 
+                  Icon="{FontImage &#xf093;, FontFamily=faSolid, Size=44, Color=Red}"
+                  ContentTemplate="{DataTemplate views:MyApplications}"/>
+
+    <ShellContent Title="Settings" 
+                  Icon="{FontImage &#xf7d9;, FontFamily=faSolid, Size=44, Color=Red}"
+                  ContentTemplate="{DataTemplate views:User}"/>
+
+
 
 </Shell>
