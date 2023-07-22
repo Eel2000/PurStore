@@ -7,9 +7,9 @@
              x:Class="PureStore.App.Views.Desktop.DesktopHome"
              Title="Home" BackgroundColor="#212121">
 
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <vm:DesktopHomeViewModel/>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
 
     <ScrollView Padding="0,0,0,10" VerticalScrollBarVisibility="Never">
         <Grid RowDefinitions="auto,auto,auto,auto">

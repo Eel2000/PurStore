@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PureStore.App.Models;
+using PureStore.App.ViewModels.Desktop;
 using PureStore.App.Views.Desktop.DetailsPages;
 using System.Collections.ObjectModel;
 
@@ -8,12 +9,15 @@ namespace PureStore.App.ViewModels;
 
 public partial class DesktopHomeViewModel : ObservableObject
 {
+    private ViewAppPageViewModel _pageViewModel;
+
     [ObservableProperty]
     private ObservableCollection<ItemApp> _apps;
 
-    public DesktopHomeViewModel()
+    public DesktopHomeViewModel(ViewAppPageViewModel pageViewModel)
     {
         LoadMostDownloaded();
+        _pageViewModel = pageViewModel;
     }
 
     private void LoadMostDownloaded()
@@ -45,7 +49,7 @@ public partial class DesktopHomeViewModel : ObservableObject
         try
         {
             //Shell.Current.GoToAsync("//viewApp");
-            Shell.Current.Navigation.PushModalAsync(new ViewAppPage(), true);
+            Shell.Current.Navigation.PushModalAsync(new ViewAppPage(arg as ItemApp, _pageViewModel), true);
             return Task.CompletedTask;
         }
         catch (Exception)

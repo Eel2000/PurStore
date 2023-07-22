@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:rv="clr-namespace:RatingView.Views;assembly=RatingView"
              xmlns:vm="clr-namespace:PureStore.App.ViewModels.Desktop"
              x:Class="PureStore.App.Views.Desktop.DetailsPages.ViewAppPage"
              Title="ViewAppPage">
@@ -8,6 +9,8 @@
     <ContentPage.BindingContext>
         <vm:ViewAppPageViewModel/>
     </ContentPage.BindingContext>
+    
+    
     <Grid RowDefinitions="Auto,*">
         <HorizontalStackLayout Margin="10">
             <Image x:Name="backArrow" Source="{FontImage &#xf060;, FontFamily=faSolid, Size=60, Color=Orange}" 
@@ -17,5 +20,45 @@
                 </Image.GestureRecognizers>
             </Image>
         </HorizontalStackLayout>
+
+        <Grid Grid.Row="1" RowDefinitions="Auto, *">
+            <Grid ColumnDefinitions="Auto,*" Margin="10,40,0,0">
+                <Border Style="{x:DynamicResource BorderGlobalStyle}"
+                        HeightRequest="290" WidthRequest="250">
+                    <Image x:Name="AppBanner" Source="https://wallpaper.dog/large/10698945.jpg" Aspect="AspectFill"/>
+                </Border>
+
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="EndAndExpand" Margin="10">
+                    <Label x:Name="LblTitle"
+                           FontFamily="OpenSansRegular" 
+                           FontSize="Title"/>
+                    
+                    <Label x:Name="LblpubDate"/>
+
+                    <rv:RatingControl x:Name="rating"
+                                      HorizontalOptions="StartAndExpand"
+                                      StrokeThickness="3"
+                                      Fill="DarkOrange"
+                                      Size="20"
+                                      Shape="Heart"
+                                      Animate="False"
+                                      Grid.Row="1" 
+                                      Margin="2,10,0,0"/>
+
+                    <Button BackgroundColor="#306a9e"
+                            WidthRequest="250"
+                            HorizontalOptions="Start"
+                            Margin="0,10,0,0"
+                            Text="Download"
+                            TextColor="White"
+                            Style="{x:DynamicResource BtnDownload}"
+                            ImageSource="{FontImage &#xf019;, FontFamily=faSolid, Size=20, Color=Orange}"/>
+                </VerticalStackLayout>
+
+                <Grid Grid.Row="1">
+                    
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </ContentPage>
