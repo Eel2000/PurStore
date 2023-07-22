@@ -68,6 +68,9 @@
 	  <MauiXaml Update="DesktopShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\ApplicationStyle.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Desktop\ApplicationsStore.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -29,7 +29,8 @@ public partial class DesktopHomeViewModel : ObservableObject
                 AverageOldYear = 6,
                 Description = "Simple calculator to help people.",
                 PublicationDate = DateTime.Now,
-                Rating = 3.4
+                Rating = 3.4,
+                ImageUrl = "https://wallpaper.dog/large/164795.jpg"
             };
 
             Apps.Add(newApp);

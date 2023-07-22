@@ -15,7 +15,7 @@ public partial class DesktopHome : ContentPage
     private void PointerGestureRecognizer_PointerEntered(object sender, Microsoft.Maui.Controls.PointerEventArgs e)
     {
 #if WINDOWS
-        if (sender is Frame frame && frame.Handler.PlatformView is Microsoft.UI.Xaml.Controls.Border nativeFrame)
+        if (sender is Border frame && frame.Handler.PlatformView is Microsoft.UI.Xaml.Controls.Border nativeFrame)
         {
             nativeFrame.ChangeCursor(InputSystemCursor.Create(InputSystemCursorShape.Hand));
         }
@@ -25,7 +25,7 @@ public partial class DesktopHome : ContentPage
     private void PointerGestureRecognizer_PointerExited(object sender, Microsoft.Maui.Controls.PointerEventArgs e)
     {
 #if WINDOWS
-        if (sender is Frame frame && frame.Handler.PlatformView is Microsoft.UI.Xaml.Controls.Border nativeFrame)
+        if (sender is Border frame && frame.Handler.PlatformView is Microsoft.UI.Xaml.Controls.Border nativeFrame)
         {
             nativeFrame.ChangeCursor(InputSystemCursor.Create(InputSystemCursorShape.Arrow));
         }

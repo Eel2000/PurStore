@@ -5,50 +5,34 @@
              xmlns:models="clr-namespace:PureStore.App.Models"
              xmlns:rv="clr-namespace:RatingView.Views;assembly=RatingView"
              x:Class="PureStore.App.Views.Desktop.DesktopHome"
-             Title="Home">
+             Title="Home" BackgroundColor="#212121">
 
     <ContentPage.BindingContext>
         <vm:DesktopHomeViewModel/>
     </ContentPage.BindingContext>
-
-    <ContentPage.Resources>
-        <Style x:Key="HoverFrameStyle" TargetType="Frame">
-            <Setter Property="VisualStateManager.VisualStateGroups">
-                <VisualStateGroupList>
-                    <VisualStateGroup x:Name="CommonState">
-                        <VisualState x:Name="Normal"/>
-                        <VisualState x:Name="PointerOver">
-                            <VisualState.Setters>
-                                <Setter Property="BorderColor" Value="{x:DynamicResource Gray100}"/>
-                                <Setter Property="Scale" Value="1.02"/>
-                                <Setter Property="HasShadow" Value="True"/>
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="Touched">
-                            <VisualState.Setters>
-                                <Setter Property="Scale" Value="0.1"/>
-                                <Setter Property="BorderColor" Value="{x:DynamicResource Yellow100Accent}"/>
-                                <Setter Property="HasShadow" Value="False"/>
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateGroupList>
-            </Setter>
-        </Style>
-    </ContentPage.Resources>
 
     <ScrollView Padding="0,0,0,10" VerticalScrollBarVisibility="Never">
         <Grid RowDefinitions="auto,auto,auto,auto">
 
             <Grid HeightRequest="50"></Grid>
 
-            <Grid Grid.Row="1" Margin="22,0,22,0" ColumnDefinitions="*,0.5*" ColumnSpacing="10"
-                  HeightRequest="300">
-                <Frame  HasShadow="True">
-                </Frame>
+            <Grid Grid.Row="1" Margin="22,0,22,0" ColumnDefinitions="*,0.3*" ColumnSpacing="10"
+                  HeightRequest="450">
+                <Grid>
+                    <Border Style="{DynamicResource BorderGlobalStyle}">
+                        <Image Source="https://wallpaper.dog/large/10852363.jpg" Aspect="Fill"/>
+                    </Border>
+                    <Label Text="Welcome to the store of all people" 
+                           TextColor="Orange"
+                           FontFamily="OpenSansSemibold"
+                           FontSize="Header"
+                           Margin="10,0,0,0"
+                           VerticalTextAlignment="Center"/>
+                </Grid>
 
-                <Frame Grid.Column="1"  HasShadow="True">
-                </Frame>
+                <Border Grid.Column="1"  Style="{StaticResource BorderGlobalStyle}">
+                    <Image Source="https://wallpaper.dog/large/171413.jpg" Aspect="AspectFill"/>
+                </Border>
             </Grid>
 
             <Grid Grid.Row="2" Margin="22,10,22,0" HeightRequest="60"
@@ -73,30 +57,34 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:ItemApp">
-                        <Frame x:Name="itemFram" CornerRadius="10" Style="{StaticResource HoverFrameStyle}"
-                           HeightRequest="260" WidthRequest="150" IsClippedToBounds="True" BorderColor="Transparent"
-                               BackgroundColor="WhiteSmoke" HasShadow="True">
-                            <Frame.GestureRecognizers>
+                        <Border x:Name="itemFram"  Style="{StaticResource HoverFrameStyle}"
+                           HeightRequest="260" WidthRequest="180"  
+                               BackgroundColor="Transparent" >
+                            <Border.GestureRecognizers>
                                 <PointerGestureRecognizer PointerEntered="PointerGestureRecognizer_PointerEntered"
                                                       PointerExited="PointerGestureRecognizer_PointerExited"/>
-                            </Frame.GestureRecognizers>
+                            </Border.GestureRecognizers>
                             <Grid RowDefinitions="*,Auto,Auto,Auto">
 
-                                <Label Grid.Row="1" Text="{Binding Title}" FontSize="Caption" Margin="0,5,0,0"/>
+                                <Grid Margin="0,5,0,0">
+                                    <Image Source="{Binding ImageUrl}" Aspect="Fill"/>
+                                </Grid>
+
+                                <Label Grid.Row="2" Text="{Binding Title}" FontSize="Caption" Margin="0,0,0,0"/>
 
                                 <!--<Label Grid.Row="2" Text="{Binding Author, StringFormat='by {0}'}"/>-->
 
                                 <rv:RatingControl Value="{Binding Rating}"
-                                                  VerticalOptions="EndAndExpand"
                                                   HorizontalOptions="StartAndExpand"
                                                   StrokeThickness="3"
                                                   Fill="DarkOrange"
                                                   Size="15"
                                                   Shape="Heart"
-                                                  Animate="False"/>
+                                                  Animate="False"
+                                                  Grid.Row="1" Margin="2"/>
                                 <!--<Button Grid.Row="3" HorizontalOptions="Start" HeightRequest="40" Text="Get the App"/>-->
                             </Grid>
-                        </Frame>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
