@@ -23,8 +23,11 @@ public partial class ViewAppPage : ContentPage
         BindingContext = viewModel;
 
         AppBanner.Source = ImageSource.FromUri(new Uri(item.ImageUrl));
+
         LblTitle.Text = item.Title;
         LblpubDate.Text = "Published: " + item.PublicationDate.ToString("d");
+        lblDescription.Text = item.Description;
+
         rating.Value = item.Rating;
     }
 }

@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:rv="clr-namespace:RatingView.Views;assembly=RatingView"
              xmlns:vm="clr-namespace:PureStore.App.ViewModels.Desktop"
+             xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="PureStore.App.Views.Desktop.DetailsPages.ViewAppPage"
              Title="ViewAppPage">
 
     <ContentPage.BindingContext>
         <vm:ViewAppPageViewModel/>
     </ContentPage.BindingContext>
-    
-    
+
+
     <Grid RowDefinitions="Auto,*">
         <HorizontalStackLayout Margin="10">
             <Image x:Name="backArrow" Source="{FontImage &#xf060;, FontFamily=faSolid, Size=60, Color=Orange}" 
@@ -32,7 +33,7 @@
                     <Label x:Name="LblTitle"
                            FontFamily="OpenSansRegular" 
                            FontSize="Title"/>
-                    
+
                     <Label x:Name="LblpubDate"/>
 
                     <rv:RatingControl x:Name="rating"
@@ -55,9 +56,41 @@
                             ImageSource="{FontImage &#xf019;, FontFamily=faSolid, Size=20, Color=Orange}"/>
                 </VerticalStackLayout>
 
-                <Grid Grid.Row="1">
-                    
-                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" RowDefinitions="Auto,*">
+                <VerticalStackLayout>
+                    <Label Text="Description"
+                           Margin="10,50,0,0"
+                           FontFamily="OpenSansRegular"
+                           FontSize="Title"
+                           TextDecorations="Underline"/>
+                </VerticalStackLayout>
+
+                <ScrollView Grid.Row="1">
+                    <VerticalStackLayout>
+                        <Label x:Name="lblDescription" LineBreakMode="WordWrap"
+                           FontFamily="OpenSansRegular" Margin="10,30,0,20"
+                               WidthRequest="950"
+                               HorizontalOptions="StartAndExpand"/>
+
+                        <VerticalStackLayout VerticalOptions="EndAndExpand">
+                            <Label Text="Rate the app"
+                                   FontSize="Subtitle"
+                                   TextColor="Orange"
+                                   FontFamily="OpenSanRegular"
+                                   Margin="10,0,0,0"/>
+
+                            <rv:RatingControl AllowRating="True"
+                                            HorizontalOptions="StartAndExpand"
+                                            StrokeThickness="3"
+                                            Fill="DarkOrange"
+                                            Size="25"
+                                            Shape="Heart"
+                                            Animate="True"
+                                            Grid.Row="1" Margin="10,10,0,0"/>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </ScrollView>
             </Grid>
         </Grid>
     </Grid>
