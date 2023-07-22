@@ -22,17 +22,57 @@
                     <Border Style="{DynamicResource BorderGlobalStyle}">
                         <Image Source="https://wallpaper.dog/large/10852363.jpg" Aspect="Fill"/>
                     </Border>
-                    <Label Text="Welcome to the store of all people" 
-                           TextColor="Orange"
-                           FontFamily="OpenSansSemibold"
-                           FontSize="Header"
-                           Margin="10,0,0,0"
-                           VerticalTextAlignment="Center"/>
+
+                    <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                        <Label Text="Welcome to All Store App" 
+                               TextColor="Orange"
+                               FontFamily="OpenSansSemibold"
+                               FontSize="Header"
+                               Margin="10,0,0,0"
+                               VerticalTextAlignment="Center"/>
+
+                        <Label Text="This is the store of all people. the store that brings you"
+                               TextColor="White"
+                               FontFamily="OpenSansRegular"
+                               FontSize="Title"
+                               Margin="35,0,0,0"/>
+
+                        <Label Text="What you need in term of GAMING,APPS and more"
+                               TextColor="White"
+                               FontFamily="OpenSansRegular"
+                               FontSize="Title"
+                               Margin="90,0,0,0"/>
+
+                    </VerticalStackLayout>
                 </Grid>
 
-                <Border Grid.Column="1"  Style="{StaticResource BorderGlobalStyle}">
-                    <Image Source="https://wallpaper.dog/large/171413.jpg" Aspect="AspectFill"/>
-                </Border>
+                <Grid Grid.Column="1">
+                    <Border Style="{StaticResource BorderGlobalStyle}">
+                        <Image Source="https://wallpaper.dog/large/171413.jpg" Aspect="AspectFill"/>
+                    </Border>
+
+                    <Border Style="{DynamicResource BorderGlobalStyle}" Background="Transparent">
+                        <Grid Opacity="0.2" BackgroundColor="#f3f6f4"/>
+                    </Border>
+
+                    <VerticalStackLayout VerticalOptions="CenterAndExpand" 
+                                         HorizontalOptions="CenterAndExpand">
+                        <Label Text="GAMING"
+                               FontSize="Header"
+                               TextColor="#3d85c6"/>
+
+                        <Label Text="Familly"
+                               FontSize="Title"
+                               TextColor="#3d85c6"/>
+
+                        <Label Text="SPORT"
+                               FontSize="Subtitle"
+                               TextColor="#3d85c6"/>
+
+                        <Label Text="more.."
+                               TextColor="#3d85c6"/>
+                    </VerticalStackLayout>
+                </Grid>
             </Grid>
 
             <Grid Grid.Row="2" Margin="22,10,22,0" HeightRequest="60"
@@ -50,7 +90,7 @@
                     <Border.Background>
                         <LinearGradientBrush EndPoint="1,0">
                             <GradientStop Color="SaddleBrown" Offset="0.1"/>
-                            <GradientStop Color="DarkRed" Offset="1.1"/>
+                            <GradientStop Color="#2f1969" Offset="1.0"/>
                         </LinearGradientBrush>
                     </Border.Background>
                 </Border>
