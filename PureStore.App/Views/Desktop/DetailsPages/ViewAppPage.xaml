@@ -11,7 +11,7 @@
     <Grid RowDefinitions="Auto,*">
         <HorizontalStackLayout Margin="10">
             <Image x:Name="backArrow" Source="{FontImage &#xf060;, FontFamily=faSolid, Size=60, Color=Orange}" 
-                   HeightRequest="20" WidthRequest="30" Style="{x:StaticResource ArrowBackStyle}">
+                   HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding BackCommand}" />
                 </Image.GestureRecognizers>

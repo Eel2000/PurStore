@@ -14,7 +14,7 @@
     <ScrollView Padding="0,0,0,10" VerticalScrollBarVisibility="Never">
         <Grid RowDefinitions="auto,auto,auto,auto">
 
-            <Grid HeightRequest="50"></Grid>
+            <Grid HeightRequest="20"></Grid>
 
             <Grid Grid.Row="1" Margin="22,0,22,0" ColumnDefinitions="*,0.3*" ColumnSpacing="10"
                   HeightRequest="450">

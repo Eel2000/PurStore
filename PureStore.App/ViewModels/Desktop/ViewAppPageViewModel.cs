@@ -10,7 +10,8 @@ namespace PureStore.App.ViewModels.Desktop
         [RelayCommand]
         Task Back()
         {
-            Shell.Current.GoToAsync("//home");
+            //Shell.Current.GoToAsync("//home");
+            Shell.Current.Navigation.PopToRootAsync();
             return Task.CompletedTask;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PureStore.App.Models;
+using PureStore.App.Views.Desktop.DetailsPages;
 using System.Collections.ObjectModel;
 
 namespace PureStore.App.ViewModels;
@@ -43,7 +44,8 @@ public partial class DesktopHomeViewModel : ObservableObject
     {
         try
         {
-            Shell.Current.GoToAsync("//viewApp");
+            //Shell.Current.GoToAsync("//viewApp");
+            Shell.Current.Navigation.PushModalAsync(new ViewAppPage(), true);
             return Task.CompletedTask;
         }
         catch (Exception)
