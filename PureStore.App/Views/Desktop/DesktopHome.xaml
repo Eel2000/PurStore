@@ -37,20 +37,35 @@
 
             <Grid Grid.Row="2" Margin="22,10,22,0" HeightRequest="60"
                   ColumnDefinitions="0.2*,0.2*,*" ColumnSpacing="10">
-                <Frame>
+                <Border Style="{DynamicResource BorderGlobalStyle}">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="BlueViolet" Offset="0.1"/>
+                            <GradientStop Color="DarkOrange" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
 
-                </Frame>
+                <Border Grid.Column="1" Style="{DynamicResource BorderGlobalStyle}">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="SaddleBrown" Offset="0.1"/>
+                            <GradientStop Color="DarkRed" Offset="1.1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
 
-                <Frame Grid.Column="1">
-
-                </Frame>
-
-                <Frame Grid.Column="2">
-
-                </Frame>
+                <Border Grid.Column="2" Style="{DynamicResource BorderGlobalStyle}">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="BlueViolet" Offset="0.1"/>
+                            <GradientStop Color="DarkOrange" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
             </Grid>
 
-            <CollectionView Grid.Row="3" ItemsSource="{Binding Apps}" Margin="15,50,25,0"
+            <CollectionView Grid.Row="3" ItemsSource="{Binding Apps}" Margin="15,30,25,0"
                             HorizontalScrollBarVisibility="Never">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
@@ -70,7 +85,11 @@
                                     <Image Source="{Binding ImageUrl}" Aspect="Fill"/>
                                 </Grid>
 
-                                <Label Grid.Row="2" Text="{Binding Title}" FontSize="Caption" Margin="0,0,0,0"/>
+                                <Label Grid.Row="2" Text="{Binding Title}" 
+                                       FontSize="Caption"
+                                       FontFamily="OpenSansRegular"
+                                       Margin="3,5,0,0" 
+                                       TextColor="White"/>
 
                                 <!--<Label Grid.Row="2" Text="{Binding Author, StringFormat='by {0}'}"/>-->
 
@@ -81,7 +100,7 @@
                                                   Size="15"
                                                   Shape="Heart"
                                                   Animate="False"
-                                                  Grid.Row="1" Margin="2"/>
+                                                  Grid.Row="1" Margin="2,10,0,0"/>
                                 <!--<Button Grid.Row="3" HorizontalOptions="Start" HeightRequest="40" Text="Get the App"/>-->
                             </Grid>
                         </Border>

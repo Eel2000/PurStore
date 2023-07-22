@@ -37,6 +37,7 @@
         <Setter Property="Stroke" Value="Transparent"/>
         <Setter Property="StrokeLineCap" Value="Round"/>
         <Setter Property="StrokeLineJoin" Value="Round"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Gray950}"/>
     </Style>
     
     <Style x:Key="tabBarCustom" TargetType="TabbedPage" ApplyToDerivedTypes="True">

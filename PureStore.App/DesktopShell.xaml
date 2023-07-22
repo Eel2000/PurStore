@@ -25,7 +25,7 @@
         </DataTemplate>
     </Shell.ItemTemplate>-->
 
-    <TabBar Style="{DynamicResource Key=tabBarCustom}">
+    <TabBar Shell.TabBarUnselectedColor="White">
         <ShellContent Title="Home"
                   ToolTipProperties.Text="Home page"
                   Icon="{FontImage &#xf015;, FontFamily=faSolid, Size=50, Color=Orange}"
