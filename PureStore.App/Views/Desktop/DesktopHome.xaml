@@ -105,19 +105,24 @@
                 </Border>
             </Grid>
 
-            <CollectionView Grid.Row="3" ItemsSource="{Binding Apps}" Margin="15,30,25,0"
-                            HorizontalScrollBarVisibility="Never">
+            <CollectionView x:Name="recentApps" Grid.Row="3" ItemsSource="{Binding Apps}" Margin="15,30,25,0"
+                            HorizontalScrollBarVisibility="Never"
+                            SelectionChangedCommand="{Binding ShowDetailsCommand}"
+                            SelectionMode="Single"
+                            SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={x:Reference recentApps}}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:ItemApp">
+                    <DataTemplate>
                         <Border x:Name="itemFram"  Style="{StaticResource HoverFrameStyle}"
                            HeightRequest="260" WidthRequest="180"  
                                BackgroundColor="Transparent" >
                             <Border.GestureRecognizers>
                                 <PointerGestureRecognizer PointerEntered="PointerGestureRecognizer_PointerEntered"
                                                       PointerExited="PointerGestureRecognizer_PointerExited"/>
+
+                                <!--<TapGestureRecognizer Command="{Binding ShowDetailsCommand}"/>-->
                             </Border.GestureRecognizers>
                             <Grid RowDefinitions="*,Auto,Auto,Auto">
 

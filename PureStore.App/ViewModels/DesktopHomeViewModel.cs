@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using PureStore.App.Models;
 using System.Collections.ObjectModel;
 
@@ -34,6 +35,20 @@ public partial class DesktopHomeViewModel : ObservableObject
             };
 
             Apps.Add(newApp);
+        }
+    }
+
+    [RelayCommand]
+    Task ShowDetails(object arg)
+    {
+        try
+        {
+            Shell.Current.GoToAsync("//viewApp");
+            return Task.CompletedTask;
+        }
+        catch (Exception)
+        {
+            return Task.CompletedTask;
         }
     }
 }

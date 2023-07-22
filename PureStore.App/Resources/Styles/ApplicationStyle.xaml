@@ -32,6 +32,27 @@
         <Setter Property="StrokeLineJoin" Value="Round"/>
     </Style>
 
+    <Style x:Key="ArrowBackStyle" TargetType="Image">
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="Scale"
+                            Value="1" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Scale"
+                            Value="0.4" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
     <Style x:Key="BorderGlobalStyle" TargetType="Border">
         <Setter Property="StrokeShape" Value="RoundRectangle 10,10,10,10"/>
         <Setter Property="Stroke" Value="Transparent"/>

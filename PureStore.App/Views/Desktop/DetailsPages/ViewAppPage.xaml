@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PureStore.App.ViewModels.Desktop"
+             x:Class="PureStore.App.Views.Desktop.DetailsPages.ViewAppPage"
+             Title="ViewAppPage">
+
+    <ContentPage.BindingContext>
+        <vm:ViewAppPageViewModel/>
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="Auto,*">
+        <HorizontalStackLayout Margin="10">
+            <Image x:Name="backArrow" Source="{FontImage &#xf060;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                   HeightRequest="20" WidthRequest="30" Style="{x:StaticResource ArrowBackStyle}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>
