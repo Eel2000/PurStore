@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:rv="clr-namespace:RatingView.Views;assembly=RatingView"
+             xmlns:vm="clr-namespace:PureStore.App.ViewModels.Desktop"
+             xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="PureStore.App.Views.Desktop.DetailsPages.ViewAppPage"
+             Title="ViewAppPage">
+
+    <ContentPage.BindingContext>
+        <vm:ViewAppPageViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <Grid RowDefinitions="Auto,*">
+        <HorizontalStackLayout Margin="10">
+            <Image x:Name="backArrow" Source="{FontImage &#xf060;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                   HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+        </HorizontalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <Grid RowDefinitions="Auto, *">
+                <Grid ColumnDefinitions="Auto,*" Margin="30,0,0,0">
+                    <Border Style="{x:DynamicResource BorderGlobalStyle}"
+                        HeightRequest="320" WidthRequest="470">
+                        <Image x:Name="AppBanner" Source="https://wallpaper.dog/large/10698945.jpg" Aspect="AspectFill"/>
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="30,10,10,10">
+                        <Label x:Name="LblTitle"
+                           FontFamily="OpenSansRegular" 
+                           FontSize="Title"/>
+
+                        <Label x:Name="LblpubDate"/>
+
+                        <rv:RatingControl x:Name="rating"
+                                      HorizontalOptions="StartAndExpand"
+                                      StrokeThickness="3"
+                                      Fill="DarkOrange"
+                                      Size="20"
+                                      Shape="Heart"
+                                      Animate="False"
+                                      Grid.Row="1" 
+                                      Margin="0,10,0,0"/>
+
+                        <Button BackgroundColor="#306a9e"
+                            WidthRequest="250"
+                            HorizontalOptions="Start"
+                            Margin="0,10,0,0"
+                            Text="Download"
+                            TextColor="White"
+                            Style="{x:DynamicResource BtnDownload}"
+                            ImageSource="{FontImage &#xf019;, FontFamily=faSolid, Size=20, Color=Orange}"/>
+                    </VerticalStackLayout>
+
+                </Grid>
+                
+                <Grid Grid.Row="1" RowDefinitions="Auto,Auto,*" VerticalOptions="CenterAndExpand">
+                    <VerticalStackLayout>
+                        <Label Text="Description"
+                           Margin="30,20,0,0"
+                           FontFamily="OpenSansRegular"
+                           FontSize="Title"
+                           TextDecorations="Underline"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Row="1">
+                        <Label x:Name="lblDescription" LineBreakMode="WordWrap"
+                           FontFamily="OpenSansRegular" Margin="30,10,0,20"
+                               WidthRequest="950"
+                               HorizontalOptions="StartAndExpand"/>
+
+                        <VerticalStackLayout VerticalOptions="EndAndExpand">
+                            <Label Text="Rate the app"
+                                   FontSize="Subtitle"
+                                   TextColor="Orange"
+                                   FontFamily="OpenSanRegular"
+                                   Margin="30,0,0,0"/>
+
+                            <rv:RatingControl AllowRating="True"
+                                            HorizontalOptions="StartAndExpand"
+                                            StrokeThickness="3"
+                                            Fill="DarkOrange"
+                                            Size="25"
+                                            Shape="Heart"
+                                            Animate="True"
+                                            Grid.Row="1" Margin="30,10,0,10"/>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+
+                    <Grid Grid.Row="2" RowDefinitions="Auto,*,Auto" Margin="30,20,0,20" RowSpacing="10">
+
+                        <HorizontalStackLayout>
+                            <Label Text="Feedbacks" FontSize="Title"
+                               FontFamily="OpenSansRegular"/>
+                        </HorizontalStackLayout>
+
+                        <CollectionView Grid.Row="1" SelectionMode="Single" ItemsSource="{Binding FeedBacks}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HeightRequest="180">
+                                        <HorizontalStackLayout Spacing="5" Margin="0,10,0,0">
+                                            <xct:AvatarView Text="{Binding Initials}"
+                                                            FontFamily="OpenSansSemiBold"
+                                                            BackgroundColor="DarkOrange"
+                                                            VerticalOptions="StartAndExpand"
+                                                            Margin="15"/>
+
+                                            <VerticalStackLayout Spacing="10">
+                                                <HorizontalStackLayout Spacing="20">
+                                                    <Label Text="{Binding Username}" FontSize="Subtitle"/>
+
+                                                    <Label Text="{Binding PublishedAt}" FontSize="Caption" 
+                                                   HorizontalOptions="EndAndExpand"/>
+                                                </HorizontalStackLayout>
+
+                                                <VerticalStackLayout Spacing="40">
+                                                    <Label Text="{Binding Content}"
+                                                           FontFamily="OpenSansRegular"/>
+
+                                                    <rv:RatingControl Value="{Binding Rating}"
+                                                                      HorizontalOptions="Start"
+                                                                      VerticalOptions="EndAndExpand"
+                                                                      Fill="DarkOrange"
+                                                                      Shape="Heart"
+                                                                      StrokeThickness="3.5"
+                                                                      Animate="False"
+                                                                      Size="20"/>
+                                                </VerticalStackLayout>
+                                            </VerticalStackLayout>
+                                        </HorizontalStackLayout>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <HorizontalStackLayout Grid.Row="2" Spacing="10" Margin="20">
+                            <Label Text="Contact developer"/>
+                            <VerticalStackLayout>
+                                <Label Text="Contact developer"/>
+                                <Label Text="Contact developer"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

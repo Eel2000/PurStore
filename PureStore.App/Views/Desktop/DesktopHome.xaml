@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PureStore.App.ViewModels"
+             xmlns:models="clr-namespace:PureStore.App.Models"
+             xmlns:rv="clr-namespace:RatingView.Views;assembly=RatingView"
+             x:Class="PureStore.App.Views.Desktop.DesktopHome"
+             Title="Home" BackgroundColor="#212121">
+
+    <!--<ContentPage.BindingContext>
+        <vm:DesktopHomeViewModel/>
+    </ContentPage.BindingContext>-->
+
+    <ScrollView Padding="0,0,0,10" VerticalScrollBarVisibility="Never">
+        <Grid RowDefinitions="auto,auto,auto,auto">
+
+            <Grid HeightRequest="20"></Grid>
+
+            <Grid Grid.Row="1" Margin="22,0,22,0" ColumnDefinitions="*,0.3*" ColumnSpacing="10"
+                  HeightRequest="450">
+                <Grid>
+                    <Border Style="{DynamicResource BorderGlobalStyle}">
+                        <Image Source="https://wallpaper.dog/large/10852363.jpg" Aspect="Fill"/>
+                    </Border>
+
+                    <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                        <Label Text="Welcome to All Store App" 
+                               TextColor="Orange"
+                               FontFamily="OpenSansSemibold"
+                               FontSize="Header"
+                               Margin="10,0,0,0"
+                               VerticalTextAlignment="Center"/>
+
+                        <Label Text="This is the store of all people. the store that brings you"
+                               TextColor="White"
+                               FontFamily="OpenSansRegular"
+                               FontSize="Title"
+                               Margin="35,0,0,0"/>
+
+                        <Label Text="What you need in term of GAMING,APPS and more"
+                               TextColor="White"
+                               FontFamily="OpenSansRegular"
+                               FontSize="Title"
+                               Margin="90,0,0,0"/>
+
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Border Style="{StaticResource BorderGlobalStyle}">
+                        <Image Source="https://wallpaper.dog/large/171413.jpg" Aspect="AspectFill"/>
+                    </Border>
+
+                    <Border Style="{DynamicResource BorderGlobalStyle}" Background="Transparent">
+                        <Grid Opacity="0.2" BackgroundColor="#f3f6f4"/>
+                    </Border>
+
+                    <VerticalStackLayout VerticalOptions="CenterAndExpand" 
+                                         HorizontalOptions="CenterAndExpand">
+                        <Label Text="GAMING"
+                               FontSize="Header"
+                               TextColor="#3d85c6"/>
+
+                        <Label Text="Familly"
+                               FontSize="Title"
+                               TextColor="#3d85c6"/>
+
+                        <Label Text="SPORT"
+                               FontSize="Subtitle"
+                               TextColor="#3d85c6"/>
+
+                        <Label Text="more.."
+                               TextColor="#3d85c6"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="22,10,22,0" HeightRequest="60"
+                  ColumnDefinitions="0.2*,0.2*,*" ColumnSpacing="10">
+                <Border Style="{DynamicResource BorderGlobalStyle}">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="BlueViolet" Offset="0.1"/>
+                            <GradientStop Color="DarkOrange" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <Border Grid.Column="1" Style="{DynamicResource BorderGlobalStyle}">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="SaddleBrown" Offset="0.1"/>
+                            <GradientStop Color="#2f1969" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <Border Grid.Column="2" Style="{DynamicResource BorderGlobalStyle}">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Color="BlueViolet" Offset="0.1"/>
+                            <GradientStop Color="DarkOrange" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+            </Grid>
+
+            <CollectionView x:Name="recentApps" Grid.Row="3" ItemsSource="{Binding Apps}" Margin="15,30,25,0"
+                            HorizontalScrollBarVisibility="Never"
+                            SelectionChangedCommand="{Binding ShowDetailsCommand}"
+                            SelectionMode="Single"
+                            SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={x:Reference recentApps}}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border x:Name="itemFram"  Style="{StaticResource HoverFrameStyle}"
+                           HeightRequest="260" WidthRequest="180"  
+                               BackgroundColor="Transparent" >
+                            <Border.GestureRecognizers>
+                                <PointerGestureRecognizer PointerEntered="PointerGestureRecognizer_PointerEntered"
+                                                      PointerExited="PointerGestureRecognizer_PointerExited"/>
+
+                                <!--<TapGestureRecognizer Command="{Binding ShowDetailsCommand}"/>-->
+                            </Border.GestureRecognizers>
+                            <Grid RowDefinitions="*,Auto,Auto,Auto">
+
+                                <Grid Margin="0,5,0,0">
+                                    <Image Source="{Binding ImageUrl}" Aspect="Fill"/>
+                                </Grid>
+
+                                <Label Grid.Row="2" Text="{Binding Title}" 
+                                       FontSize="Caption"
+                                       FontFamily="OpenSansRegular"
+                                       Margin="3,5,0,0" 
+                                       TextColor="White"/>
+
+                                <!--<Label Grid.Row="2" Text="{Binding Author, StringFormat='by {0}'}"/>-->
+
+                                <rv:RatingControl Value="{Binding Rating}"
+                                                  HorizontalOptions="StartAndExpand"
+                                                  StrokeThickness="3"
+                                                  Fill="DarkOrange"
+                                                  Size="15"
+                                                  Shape="Heart"
+                                                  Animate="False"
+                                                  Grid.Row="1" Margin="2,10,0,0"/>
+                                <!--<Button Grid.Row="3" HorizontalOptions="Start" HeightRequest="40" Text="Get the App"/>-->
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
