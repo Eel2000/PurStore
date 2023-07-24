@@ -23,7 +23,7 @@
         </HorizontalStackLayout>
 
         <Grid Grid.Row="1" RowDefinitions="Auto, *">
-            <Grid ColumnDefinitions="Auto,*" Margin="30,40,0,0">
+            <Grid ColumnDefinitions="Auto,*" Margin="30,0,0,0">
                 <Border Style="{x:DynamicResource BorderGlobalStyle}"
                         HeightRequest="290" WidthRequest="250">
                     <Image x:Name="AppBanner" Source="https://wallpaper.dog/large/10698945.jpg" Aspect="AspectFill"/>
@@ -60,7 +60,7 @@
             <Grid Grid.Row="1" RowDefinitions="Auto,*,*">
                 <VerticalStackLayout>
                     <Label Text="Description"
-                           Margin="30,50,0,0"
+                           Margin="30,0,0,0"
                            FontFamily="OpenSansRegular"
                            FontSize="Title"
                            TextDecorations="Underline"/>
@@ -69,7 +69,7 @@
                 <ScrollView Grid.Row="1">
                     <VerticalStackLayout>
                         <Label x:Name="lblDescription" LineBreakMode="WordWrap"
-                           FontFamily="OpenSansRegular" Margin="30,30,0,20"
+                           FontFamily="OpenSansRegular" Margin="30,0,0,20"
                                WidthRequest="950"
                                HorizontalOptions="StartAndExpand"/>
 
@@ -92,29 +92,38 @@
                     </VerticalStackLayout>
                 </ScrollView>
 
-                <CollectionView Grid.Row="2" SelectionMode="Single" ItemsSource="{Binding FeedBacks}" Margin="30,0,0,0"
-                                Header="Feedbacks">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid HeightRequest="180">
-                                <HorizontalStackLayout Spacing="5" Margin="0,10,0,0">
-                                    <xct:AvatarView Text="U"
+                <ScrollView Grid.Row="2">
+                    <Grid  RowDefinitions="Auto,*,Auto" Margin="30,0,0,0" RowSpacing="10">
+
+                        <HorizontalStackLayout>
+                            <Label Text="Feedbacks" FontSize="Title"
+                               FontFamily="OpenSansRegular"/>
+                        </HorizontalStackLayout>
+
+                        <CollectionView Grid.Row="1" SelectionMode="Single" ItemsSource="{Binding FeedBacks}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HeightRequest="180">
+                                        <HorizontalStackLayout Spacing="5" Margin="0,10,0,0">
+                                            <xct:AvatarView Text="U"
+                                                        FontFamily="OpenSansSemiBold"
                                                     BackgroundColor="DarkOrange"
                                                     VerticalOptions="StartAndExpand"
                                                     Margin="15"/>
 
-                                    <VerticalStackLayout Spacing="10">
-                                        <HorizontalStackLayout Spacing="20">
-                                            <Label Text="{Binding Username}" FontSize="Subtitle"/>
+                                            <VerticalStackLayout Spacing="10">
+                                                <HorizontalStackLayout Spacing="20">
+                                                    <Label Text="{Binding Username}" FontSize="Subtitle"/>
 
-                                            <Label Text="{Binding PublishedAt}" FontSize="Caption" 
+                                                    <Label Text="{Binding PublishedAt}" FontSize="Caption" 
                                                    HorizontalOptions="EndAndExpand"/>
-                                        </HorizontalStackLayout>
+                                                </HorizontalStackLayout>
 
-                                        <VerticalStackLayout Spacing="40">
-                                            <Label Text="{Binding Content}"/>
+                                                <VerticalStackLayout Spacing="40">
+                                                    <Label Text="{Binding Content}"
+                                                       FontFamily="OpenSansRegular"/>
 
-                                            <rv:RatingControl Value="{Binding Rating}"
+                                                    <rv:RatingControl Value="{Binding Rating}"
                                                        HorizontalOptions="Start"
                                                           VerticalOptions="EndAndExpand"
                                                           Fill="DarkOrange"
@@ -122,13 +131,23 @@
                                                           EmptyColor="Gray"
                                                        Animate="False"
                                                        Size="15"/>
-                                        </VerticalStackLayout>
-                                    </VerticalStackLayout>
-                                </HorizontalStackLayout>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                                                </VerticalStackLayout>
+                                            </VerticalStackLayout>
+                                        </HorizontalStackLayout>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <HorizontalStackLayout Grid.Row="2" Spacing="10" Margin="20">
+                            <Label Text="Contact developer"/>
+                            <VerticalStackLayout>
+                                <Label Text="Contact developer"/>
+                                <Label Text="Contact developer"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </ScrollView>
             </Grid>
         </Grid>
     </Grid>
