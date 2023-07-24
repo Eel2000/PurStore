@@ -26,11 +26,11 @@
             <Grid RowDefinitions="Auto, *">
                 <Grid ColumnDefinitions="Auto,*" Margin="30,0,0,0">
                     <Border Style="{x:DynamicResource BorderGlobalStyle}"
-                        HeightRequest="320" WidthRequest="270">
+                        HeightRequest="320" WidthRequest="470">
                         <Image x:Name="AppBanner" Source="https://wallpaper.dog/large/10698945.jpg" Aspect="AspectFill"/>
                     </Border>
 
-                    <VerticalStackLayout Grid.Column="1" VerticalOptions="EndAndExpand" Margin="10">
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Margin="30,10,10,10">
                         <Label x:Name="LblTitle"
                            FontFamily="OpenSansRegular" 
                            FontSize="Title"/>
@@ -45,7 +45,7 @@
                                       Shape="Heart"
                                       Animate="False"
                                       Grid.Row="1" 
-                                      Margin="2,10,0,0"/>
+                                      Margin="0,10,0,0"/>
 
                         <Button BackgroundColor="#306a9e"
                             WidthRequest="250"
@@ -59,10 +59,10 @@
 
                 </Grid>
                 
-                <Grid Grid.Row="1" RowDefinitions="Auto,Auto,*">
+                <Grid Grid.Row="1" RowDefinitions="Auto,Auto,*" VerticalOptions="CenterAndExpand">
                     <VerticalStackLayout>
                         <Label Text="Description"
-                           Margin="30,0,0,0"
+                           Margin="30,20,0,0"
                            FontFamily="OpenSansRegular"
                            FontSize="Title"
                            TextDecorations="Underline"/>
@@ -70,7 +70,7 @@
 
                     <VerticalStackLayout Grid.Row="1">
                         <Label x:Name="lblDescription" LineBreakMode="WordWrap"
-                           FontFamily="OpenSansRegular" Margin="30,0,0,20"
+                           FontFamily="OpenSansRegular" Margin="30,10,0,20"
                                WidthRequest="950"
                                HorizontalOptions="StartAndExpand"/>
 
@@ -92,7 +92,7 @@
                         </VerticalStackLayout>
                     </VerticalStackLayout>
 
-                    <Grid Grid.Row="2" RowDefinitions="Auto,*,Auto" Margin="30,0,0,20" RowSpacing="10">
+                    <Grid Grid.Row="2" RowDefinitions="Auto,*,Auto" Margin="30,20,0,20" RowSpacing="10">
 
                         <HorizontalStackLayout>
                             <Label Text="Feedbacks" FontSize="Title"
@@ -104,11 +104,11 @@
                                 <DataTemplate>
                                     <Grid HeightRequest="180">
                                         <HorizontalStackLayout Spacing="5" Margin="0,10,0,0">
-                                            <xct:AvatarView Text="U"
-                                                        FontFamily="OpenSansSemiBold"
-                                                    BackgroundColor="DarkOrange"
-                                                    VerticalOptions="StartAndExpand"
-                                                    Margin="15"/>
+                                            <xct:AvatarView Text="{Binding Initials}"
+                                                            FontFamily="OpenSansSemiBold"
+                                                            BackgroundColor="DarkOrange"
+                                                            VerticalOptions="StartAndExpand"
+                                                            Margin="15"/>
 
                                             <VerticalStackLayout Spacing="10">
                                                 <HorizontalStackLayout Spacing="20">
@@ -120,16 +120,16 @@
 
                                                 <VerticalStackLayout Spacing="40">
                                                     <Label Text="{Binding Content}"
-                                                       FontFamily="OpenSansRegular"/>
+                                                           FontFamily="OpenSansRegular"/>
 
                                                     <rv:RatingControl Value="{Binding Rating}"
-                                                       HorizontalOptions="Start"
-                                                          VerticalOptions="EndAndExpand"
-                                                          Fill="DarkOrange"
-                                                          Shape="Heart"
-                                                          EmptyColor="Gray"
-                                                       Animate="False"
-                                                       Size="20"/>
+                                                                      HorizontalOptions="Start"
+                                                                      VerticalOptions="EndAndExpand"
+                                                                      Fill="DarkOrange"
+                                                                      Shape="Heart"
+                                                                      StrokeThickness="3.5"
+                                                                      Animate="False"
+                                                                      Size="20"/>
                                                 </VerticalStackLayout>
                                             </VerticalStackLayout>
                                         </HorizontalStackLayout>
