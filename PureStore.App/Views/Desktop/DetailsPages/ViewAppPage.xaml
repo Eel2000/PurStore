@@ -23,7 +23,7 @@
         </HorizontalStackLayout>
 
         <Grid Grid.Row="1" RowDefinitions="Auto, *">
-            <Grid ColumnDefinitions="Auto,*" Margin="10,40,0,0">
+            <Grid ColumnDefinitions="Auto,*" Margin="30,40,0,0">
                 <Border Style="{x:DynamicResource BorderGlobalStyle}"
                         HeightRequest="290" WidthRequest="250">
                     <Image x:Name="AppBanner" Source="https://wallpaper.dog/large/10698945.jpg" Aspect="AspectFill"/>
@@ -57,10 +57,10 @@
                 </VerticalStackLayout>
 
             </Grid>
-            <Grid Grid.Row="1" RowDefinitions="Auto,*">
+            <Grid Grid.Row="1" RowDefinitions="Auto,*,*">
                 <VerticalStackLayout>
                     <Label Text="Description"
-                           Margin="10,50,0,0"
+                           Margin="30,50,0,0"
                            FontFamily="OpenSansRegular"
                            FontSize="Title"
                            TextDecorations="Underline"/>
@@ -69,7 +69,7 @@
                 <ScrollView Grid.Row="1">
                     <VerticalStackLayout>
                         <Label x:Name="lblDescription" LineBreakMode="WordWrap"
-                           FontFamily="OpenSansRegular" Margin="10,30,0,20"
+                           FontFamily="OpenSansRegular" Margin="30,30,0,20"
                                WidthRequest="950"
                                HorizontalOptions="StartAndExpand"/>
 
@@ -78,7 +78,7 @@
                                    FontSize="Subtitle"
                                    TextColor="Orange"
                                    FontFamily="OpenSanRegular"
-                                   Margin="10,0,0,0"/>
+                                   Margin="30,0,0,0"/>
 
                             <rv:RatingControl AllowRating="True"
                                             HorizontalOptions="StartAndExpand"
@@ -87,10 +87,48 @@
                                             Size="25"
                                             Shape="Heart"
                                             Animate="True"
-                                            Grid.Row="1" Margin="10,10,0,0"/>
+                                            Grid.Row="1" Margin="30,10,0,0"/>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </ScrollView>
+
+                <CollectionView Grid.Row="2" SelectionMode="Single" ItemsSource="{Binding FeedBacks}" Margin="30,0,0,0"
+                                Header="Feedbacks">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HeightRequest="180">
+                                <HorizontalStackLayout Spacing="5" Margin="0,10,0,0">
+                                    <xct:AvatarView Text="U"
+                                                    BackgroundColor="DarkOrange"
+                                                    VerticalOptions="StartAndExpand"
+                                                    Margin="15"/>
+
+                                    <VerticalStackLayout Spacing="10">
+                                        <HorizontalStackLayout Spacing="20">
+                                            <Label Text="{Binding Username}" FontSize="Subtitle"/>
+
+                                            <Label Text="{Binding PublishedAt}" FontSize="Caption" 
+                                                   HorizontalOptions="EndAndExpand"/>
+                                        </HorizontalStackLayout>
+
+                                        <VerticalStackLayout Spacing="40">
+                                            <Label Text="{Binding Content}"/>
+
+                                            <rv:RatingControl Value="{Binding Rating}"
+                                                       HorizontalOptions="Start"
+                                                          VerticalOptions="EndAndExpand"
+                                                          Fill="DarkOrange"
+                                                          Shape="Heart"
+                                                          EmptyColor="Gray"
+                                                       Animate="False"
+                                                       Size="15"/>
+                                        </VerticalStackLayout>
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </Grid>
         </Grid>
     </Grid>
