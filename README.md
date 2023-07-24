@@ -1,3 +1,6 @@
+[![.NET Core Desktop](https://github.com/Eel2000/PurStore/actions/workflows/dotnet-desktop.yml/badge.svg?event=release)](https://github.com/Eel2000/PurStore/actions/workflows/dotnet-desktop.yml)
+
+
 # PurStore
 
 ## Screen shots
