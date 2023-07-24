@@ -22,21 +22,22 @@
             </Image>
         </HorizontalStackLayout>
 
-        <Grid Grid.Row="1" RowDefinitions="Auto, *">
-            <Grid ColumnDefinitions="Auto,*" Margin="30,0,0,0">
-                <Border Style="{x:DynamicResource BorderGlobalStyle}"
-                        HeightRequest="290" WidthRequest="250">
-                    <Image x:Name="AppBanner" Source="https://wallpaper.dog/large/10698945.jpg" Aspect="AspectFill"/>
-                </Border>
+        <ScrollView Grid.Row="1">
+            <Grid RowDefinitions="Auto, *">
+                <Grid ColumnDefinitions="Auto,*" Margin="30,0,0,0">
+                    <Border Style="{x:DynamicResource BorderGlobalStyle}"
+                        HeightRequest="320" WidthRequest="270">
+                        <Image x:Name="AppBanner" Source="https://wallpaper.dog/large/10698945.jpg" Aspect="AspectFill"/>
+                    </Border>
 
-                <VerticalStackLayout Grid.Column="1" VerticalOptions="EndAndExpand" Margin="10">
-                    <Label x:Name="LblTitle"
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="EndAndExpand" Margin="10">
+                        <Label x:Name="LblTitle"
                            FontFamily="OpenSansRegular" 
                            FontSize="Title"/>
 
-                    <Label x:Name="LblpubDate"/>
+                        <Label x:Name="LblpubDate"/>
 
-                    <rv:RatingControl x:Name="rating"
+                        <rv:RatingControl x:Name="rating"
                                       HorizontalOptions="StartAndExpand"
                                       StrokeThickness="3"
                                       Fill="DarkOrange"
@@ -46,7 +47,7 @@
                                       Grid.Row="1" 
                                       Margin="2,10,0,0"/>
 
-                    <Button BackgroundColor="#306a9e"
+                        <Button BackgroundColor="#306a9e"
                             WidthRequest="250"
                             HorizontalOptions="Start"
                             Margin="0,10,0,0"
@@ -54,20 +55,20 @@
                             TextColor="White"
                             Style="{x:DynamicResource BtnDownload}"
                             ImageSource="{FontImage &#xf019;, FontFamily=faSolid, Size=20, Color=Orange}"/>
-                </VerticalStackLayout>
+                    </VerticalStackLayout>
 
-            </Grid>
-            <Grid Grid.Row="1" RowDefinitions="Auto,*,*">
-                <VerticalStackLayout>
-                    <Label Text="Description"
+                </Grid>
+                
+                <Grid Grid.Row="1" RowDefinitions="Auto,Auto,*">
+                    <VerticalStackLayout>
+                        <Label Text="Description"
                            Margin="30,0,0,0"
                            FontFamily="OpenSansRegular"
                            FontSize="Title"
                            TextDecorations="Underline"/>
-                </VerticalStackLayout>
+                    </VerticalStackLayout>
 
-                <ScrollView Grid.Row="1">
-                    <VerticalStackLayout>
+                    <VerticalStackLayout Grid.Row="1">
                         <Label x:Name="lblDescription" LineBreakMode="WordWrap"
                            FontFamily="OpenSansRegular" Margin="30,0,0,20"
                                WidthRequest="950"
@@ -87,13 +88,11 @@
                                             Size="25"
                                             Shape="Heart"
                                             Animate="True"
-                                            Grid.Row="1" Margin="30,10,0,0"/>
+                                            Grid.Row="1" Margin="30,10,0,10"/>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
-                </ScrollView>
 
-                <ScrollView Grid.Row="2">
-                    <Grid  RowDefinitions="Auto,*,Auto" Margin="30,0,0,0" RowSpacing="10">
+                    <Grid Grid.Row="2" RowDefinitions="Auto,*,Auto" Margin="30,0,0,20" RowSpacing="10">
 
                         <HorizontalStackLayout>
                             <Label Text="Feedbacks" FontSize="Title"
@@ -130,7 +129,7 @@
                                                           Shape="Heart"
                                                           EmptyColor="Gray"
                                                        Animate="False"
-                                                       Size="15"/>
+                                                       Size="20"/>
                                                 </VerticalStackLayout>
                                             </VerticalStackLayout>
                                         </HorizontalStackLayout>
@@ -147,8 +146,8 @@
                             </VerticalStackLayout>
                         </HorizontalStackLayout>
                     </Grid>
-                </ScrollView>
+                </Grid>
             </Grid>
-        </Grid>
+        </ScrollView>
     </Grid>
 </ContentPage>
