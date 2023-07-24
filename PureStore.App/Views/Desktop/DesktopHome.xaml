@@ -105,7 +105,7 @@
                 </Border>
             </Grid>
 
-            <CollectionView x:Name="recentApps" Grid.Row="3" ItemsSource="{Binding Apps}" Margin="15,30,25,0"
+            <CollectionView x:Name="recentApps" Grid.Row="3" ItemsSource="{Binding Apps}" Margin="15,30,25,35"
                             HorizontalScrollBarVisibility="Never"
                             SelectionChangedCommand="{Binding ShowDetailsCommand}"
                             SelectionMode="Single"
