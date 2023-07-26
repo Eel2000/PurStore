@@ -1,59 +1,60 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PureStore.App.Models;
 using System.Collections.ObjectModel;
 
-namespace PureStore.App.ViewModels.Desktop
+namespace PureStore.App.ViewModels.Desktop;
+
+public partial class ViewAppPageViewModel : ObservableObject
 {
-    public partial class ViewAppPageViewModel : ObservableObject
+
+    [ObservableProperty]
+    private ObservableCollection<FeedBack> _feedBacks;
+
+
+    public ViewAppPageViewModel()
     {
+        LoadDataAsync();
+    }
 
-        [ObservableProperty]
-        private ObservableCollection<FeedBack> _feedBacks;
-
-
-        public ViewAppPageViewModel()
+    private void LoadDataAsync()
+    {
+        var rnd = new Random(1);
+        FeedBacks = new();
+        for (int i = 0; i < 10; i++)
         {
-            LoadDataAsync();
-        }
-
-        private void LoadDataAsync()
-        {
-            var rnd = new Random(1);
-            FeedBacks = new();
-            for (int i = 0; i < 10; i++)
+            FeedBack feed = new()
             {
-                FeedBack feed = new()
-                {
-                    Id = Guid.NewGuid(),
-                    Content = "Awesome app, I've been enjoying it",
-                    Username = "User" + i,
-                    Rating = rnd.Next(1, 5),
-                };
+                Id = Guid.NewGuid(),
+                Content = "Awesome app, I've been enjoying it",
+                Username = "User" + i,
+                Rating = rnd.Next(1, 5),
+            };
 
-                FeedBacks.Add(feed);
-            }
+            FeedBacks.Add(feed);
         }
+    }
 
-        [RelayCommand]
-        Task Back()
+    [RelayCommand]
+    Task Back()
+    {
+        //Shell.Current.GoToAsync("//home");
+        Shell.Current.Navigation.PopToRootAsync();
+        return Task.CompletedTask;
+    }
+
+    [RelayCommand]
+    Task Download(object app)
+    {
+        try
         {
-            //Shell.Current.GoToAsync("//home");
-            Shell.Current.Navigation.PopToRootAsync();
+            Shell.Current.DisplaySnackbar("Download started");
             return Task.CompletedTask;
         }
-
-        [RelayCommand]
-        Task Download(object app)
+        catch (Exception ex)
         {
-            try
-            {
-                return Task.CompletedTask;
-            }
-            catch (Exception ex)
-            {
-                return Task.CompletedTask;
-            }
+            return Task.CompletedTask;
         }
     }
 }
