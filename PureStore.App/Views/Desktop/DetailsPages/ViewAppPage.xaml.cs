@@ -5,6 +5,8 @@ namespace PureStore.App.Views.Desktop.DetailsPages;
 
 public partial class ViewAppPage : ContentPage
 {
+    private ItemApp app;
+
     public ViewAppPage()
     {
         InitializeComponent();
@@ -14,6 +16,8 @@ public partial class ViewAppPage : ContentPage
     public ViewAppPage(ItemApp item)
     {
         InitializeComponent();
+
+        app = item;
     }
 
     public ViewAppPage(ItemApp item, ViewAppPageViewModel viewModel)
@@ -21,6 +25,8 @@ public partial class ViewAppPage : ContentPage
         InitializeComponent();
 
         BindingContext = viewModel;
+
+        app = item;
 
         AppBanner.Source = ImageSource.FromUri(new Uri(item.ImageUrl));
 

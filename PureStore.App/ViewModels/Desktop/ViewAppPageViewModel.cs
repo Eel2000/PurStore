@@ -42,5 +42,18 @@ namespace PureStore.App.ViewModels.Desktop
             Shell.Current.Navigation.PopToRootAsync();
             return Task.CompletedTask;
         }
+
+        [RelayCommand]
+        Task Download(object app)
+        {
+            try
+            {
+                return Task.CompletedTask;
+            }
+            catch (Exception ex)
+            {
+                return Task.CompletedTask;
+            }
+        }
     }
 }

@@ -26,7 +26,8 @@
         </DataTemplate>
     </Shell.ItemTemplate>-->
 
-    <TabBar Shell.TabBarUnselectedColor="White">
+    <TabBar Shell.TabBarUnselectedColor="White"
+            Shell.TabBarTitleColor="White">
         <ShellContent Title="Home"
                   ToolTipProperties.Text="Home page"
                   Icon="{FontImage &#xf015;, FontFamily=faSolid, Size=50, Color=Orange}"
