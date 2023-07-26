@@ -1,4 +1,7 @@
-﻿using Microsoft.UI.Input;
+﻿#if WINDOWS
+using Microsoft.UI.Input;
+#endif
+
 using System.Reflection;
 
 namespace PureStore.App.Extensions;
