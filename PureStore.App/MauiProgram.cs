@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PureStore.App.Services;
+using PureStore.App.Services.Interfaces;
 using PureStore.App.ViewModels;
 using PureStore.App.ViewModels.Desktop;
 using PureStore.App.Views.Desktop;
@@ -26,17 +28,25 @@ namespace PureStore.App
                 });
 
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             #region desktop registration
             //--------------pages & viewModels-------------//
-            builder.Services.AddTransient<DesktopHome>();
-            builder.Services.AddTransient<DesktopHomeViewModel>();
+            builder.Services.AddScoped<DesktopHome>();
+            builder.Services.AddScoped<DesktopHomeViewModel>();
 
             builder.Services.AddTransient<ViewAppPage>();
             builder.Services.AddTransient<ViewAppPageViewModel>();
 
+            builder.Services.AddScoped<ApplicationsStore>();
+            builder.Services.AddScoped<ApplicationStoreViewModel>();
+
+            //--------------------------------------------//
+
+            //---------------Services----------------------//
+
+            builder.Services.AddSingleton<IStoreService, StoreService>();
             //--------------------------------------------//
             #endregion
 

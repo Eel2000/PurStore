@@ -1,12 +1,79 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PureStore.App.ViewModels.Desktop"
+             xmlns:rv="clr-namespace:RatingView.Views;assembly=RatingView"
              x:Class="PureStore.App.Views.Desktop.ApplicationsStore"
              Title="Applications Store">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <!--<ContentPage.BindingContext>
+        <vm:ApplicationStoreViewModel/>
+    </ContentPage.BindingContext>-->
+
+    <Grid RowDefinitions="0.08*,*">
+        <Grid BackgroundColor="Transparent">
+            <SearchBar x:Name="searhbar" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                       Keyboard="Plain" TextTransform="Lowercase" CursorPosition="0" 
+                       TextColor="{DynamicResource Gray900}" CancelButtonColor="DarkOrange"
+                       WidthRequest="500" IsSpellCheckEnabled="True" Background="DarkOrange"
+                       SearchCommand="{Binding SearchCommand}"
+                       SearchCommandParameter="{Binding Path=Text, Source={x:Reference searhbar}}"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1" RowDefinitions="Auto, *">
+            <Label Text="Available apps / games"
+                   Margin="30,0,0,0"
+                   FontFamily="OpenSansSemibold"/>
+
+            <CollectionView x:Name="AppsList" Grid.Row="3" ItemsSource="{Binding Apps}" Margin="15,30,25,35"
+                            HorizontalScrollBarVisibility="Default"
+                            SelectionChangedCommand="{Binding ShowDetailsCommand}"
+                            SelectionMode="Single"
+                            SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={x:Reference AppsList}}"
+                            ItemsUpdatingScrollMode="KeepItemsInView"
+                            RemainingItemsThreshold="0"
+                            RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
+                            Scrolled="AppsList_Scrolled">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="6" VerticalItemSpacing="5" HorizontalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border x:Name="itemFram"  Style="{StaticResource HoverFrameStyle}"
+                           HeightRequest="260" WidthRequest="240"  
+                               BackgroundColor="Transparent" >
+                            <Border.GestureRecognizers>
+                                <PointerGestureRecognizer PointerEntered="PointerGestureRecognizer_PointerEntered"
+                                                      PointerExited="PointerGestureRecognizer_PointerExited"/>
+
+                            </Border.GestureRecognizers>
+                            <Grid RowDefinitions="*,Auto,Auto,Auto">
+
+                                <Grid Margin="0,5,0,0">
+                                    <Image Source="{Binding ImageUrl}" Aspect="AspectFill"/>
+                                </Grid>
+
+                                <Label Grid.Row="2" Text="{Binding Title}" 
+                                       FontSize="Caption"
+                                       FontFamily="OpenSansRegular"
+                                       Margin="3,5,0,0" 
+                                       TextColor="White"/>
+
+
+                                <rv:RatingControl Value="{Binding Rating}"
+                                                  HorizontalOptions="StartAndExpand"
+                                                  StrokeThickness="3"
+                                                  Fill="DarkOrange"
+                                                  Size="15"
+                                                  Shape="Heart"
+                                                  Animate="False"
+                                                  Grid.Row="1" Margin="2,10,0,0"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
 </ContentPage>
