@@ -14,4 +14,5 @@ public class ItemApp
     public int AverageOldYear { get; set; }
     public string LocalPath { get; set; }
     public bool IsInstalled { get; set; }
+    public bool isDownloading { get; set; }
 }

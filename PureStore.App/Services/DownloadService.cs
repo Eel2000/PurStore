@@ -1,4 +1,5 @@
-﻿using PureStore.App.Models;
+﻿using PureStore.App.Extensions;
+using PureStore.App.Models;
 using PureStore.App.Services.Interfaces;
 
 namespace PureStore.App.Services;
@@ -48,7 +49,8 @@ public class DownloadService : IDownloadService
                 PublicationDate = DateTime.Now,
                 Rating = rnd.Next(2, 5),
                 ImageUrl = posters[rnd.Next(0, (posters.Length - 1))],
-                IsInstalled = true,
+                IsInstalled = rnd.NextBool(),
+                isDownloading = rnd.NextBool(20),//return random bool value with 20% probality
                 LocalPath = Path.Combine(Environment.SpecialFolder.CommonProgramFilesX86.ToString(), "App #" + i)
             };
 
