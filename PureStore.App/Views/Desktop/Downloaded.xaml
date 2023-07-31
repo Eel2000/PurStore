@@ -18,12 +18,12 @@
                         <Label Grid.Column="1" Text="{Binding Title}" Margin="10,0,0,0" VerticalOptions="CenterAndExpand"
                                        FontFamily="OpenSansRegular"/>
 
-                        <Label Grid.Column="3" Text="{Binding PublicationDate, StringFormat='On going {0}'}" Margin="10,0,10,0" VerticalOptions="CenterAndExpand"
+                        <Label Grid.Column="3" Text="{Binding PublicationDate, StringFormat='Downloading {0:dd/MM/yyyy HH:mm}'}" Margin="26,0,10,0" VerticalOptions="CenterAndExpand"
                                        FontFamily="OpenSansRegular" HorizontalOptions="StartAndExpand"/>
 
 
                         <ProgressBar Grid.Column="2" BackgroundColor="LightGray" Progress="0.5" ProgressColor="DarkOrange" 
-                                     HeightRequest="50" WidthRequest="180" HorizontalOptions="StartAndExpand"/>
+                                     HeightRequest="50" WidthRequest="270" HorizontalOptions="StartAndExpand"/>
 
                         <HorizontalStackLayout Grid.Column="4" Spacing="10" Margin="10">
                             <Image x:Name="reLoad" Source="{FontImage &#xf01e;, FontFamily=faSolid, Size=60, Color=Orange}" 
@@ -68,7 +68,7 @@
                         <Label Grid.Column="1" Text="{Binding Title}" Margin="10,0,0,0" VerticalOptions="CenterAndExpand"
                                        FontFamily="OpenSansRegular"/>
 
-                        <Label Grid.Column="3" Text="{Binding PublicationDate, StringFormat='Downloaded {0}'}" Margin="10,0,0,0" VerticalOptions="CenterAndExpand"
+                        <Label Grid.Column="3" Text="{Binding PublicationDate, StringFormat='Downloaded {0:dd/MM/yyyy HH:mm}'}" Margin="10,0,0,0" VerticalOptions="CenterAndExpand"
                                        FontFamily="OpenSansRegular"/>
 
 
@@ -76,13 +76,13 @@
                                        FontFamily="OpenSansRegular"/>
 
                         <HorizontalStackLayout Grid.Column="4" Spacing="10" Margin="10">
-                            <Image x:Name="start" Source="{FontImage &#xf144;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                            <!--<Image x:Name="start" Source="{FontImage &#xf144;, FontFamily=faSolid, Size=60, Color=Orange}" 
                                                 HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
                                    ToolTipProperties.Text="Start Donwloading">
-                                <!--<Image.GestureRecognizers>
+                                --><!--<Image.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding BackCommand}" />
-                                        </Image.GestureRecognizers>-->
-                            </Image>
+                                        </Image.GestureRecognizers>--><!--
+                            </Image>-->
 
                             <Image x:Name="stop" Source="{FontImage &#xf28d;, FontFamily=faSolid, Size=60, Color=Orange}" 
                                                 HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
