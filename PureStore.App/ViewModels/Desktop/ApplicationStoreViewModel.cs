@@ -15,21 +15,6 @@ public partial class ApplicationStoreViewModel : ObservableObject
 
     private readonly IStoreService _storeService;
 
-    private readonly string[] posters = new[]
-    {
-        "https://wallpaper.dog/large/10852364.jpg",
-        "https://wallpaper.dog/large/10852421.jpg",
-        "https://wallpaper.dog/large/10716693.jpg",
-        "https://wallpaper.dog/large/10852412.jpg",
-        "https://wallpaper.dog/large/818766.jpg",
-        "https://wallpaper.dog/large/10158.jpg",
-        "https://wallpaper.dog/large/10852334.jpg",
-        "https://wallpaper.dog/large/10852347.jpg",
-        "https://wallpaper.dog/large/10852356.jpg",
-        "https://wallpaper.dog/large/10698945.jpg",
-    };
-
-    private List<ItemApp> mockDb = new();
 
     public ApplicationStoreViewModel(ViewAppPageViewModel viewAppPageViewModel, IStoreService storeService)
     {

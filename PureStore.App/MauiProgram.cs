@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Maui;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PureStore.App.Services;
 using PureStore.App.Services.Interfaces;
@@ -42,11 +41,14 @@ namespace PureStore.App
             builder.Services.AddScoped<ApplicationsStore>();
             builder.Services.AddScoped<ApplicationStoreViewModel>();
 
+            builder.Services.AddTransient<Downloaded>();
+            builder.Services.AddTransient<DownloadPageViewModel>();
             //--------------------------------------------//
 
-            //---------------Services----------------------//
 
+            //---------------Services----------------------//
             builder.Services.AddSingleton<IStoreService, StoreService>();
+            builder.Services.AddSingleton<IDownloadService, DownloadService>();
             //--------------------------------------------//
             #endregion
 

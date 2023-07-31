@@ -3,10 +3,10 @@ using PureStore.App.Services.Interfaces;
 
 namespace PureStore.App.Services;
 
-public class StoreService : IStoreService
+public class DownloadService : IDownloadService
 {
+    private List<ItemApp> _appsInstalledOrDownloaded;
 
-    private List<ItemApp> itemApps;
     private readonly string[] posters = new[]
     {
         "https://wallpaper.dog/large/10852364.jpg",
@@ -22,35 +22,22 @@ public class StoreService : IStoreService
     };
 
 
-    public StoreService()
+    public DownloadService()
     {
         InitializData();
     }
 
-    public async ValueTask<IEnumerable<ItemApp>> GetAsync(string key)
-    {
-        var data = itemApps.Where(app => app.Title.Contains(key, StringComparison.CurrentCultureIgnoreCase));
-        return data;
-    }
-
-    public async ValueTask<IEnumerable<ItemApp>> GetAsync()
-    {
-        return itemApps;
-    }
-
-    public async ValueTask<IEnumerable<ItemApp>> GetItemApps(int number)
-        => itemApps.Skip(number).Take(number).ToList();
 
     private void InitializData()
     {
-        itemApps = new();
+        _appsInstalledOrDownloaded = new();
         var rnd = new Random();
-        for (int i = 0; i < 150; i++)
+        for (int i = 0; i < 7; i++)
         {
             var newApp = new ItemApp()
             {
                 Id = Guid.NewGuid(),
-                Title = "App #" + i,
+                Title = Path.GetRandomFileName(),
                 Author = "Guidance show",
                 Size = 5.6f,
                 AverageOldYear = 6,
@@ -60,10 +47,14 @@ public class StoreService : IStoreService
                 " It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                 PublicationDate = DateTime.Now,
                 Rating = rnd.Next(2, 5),
-                ImageUrl = posters[rnd.Next(0, (posters.Length - 1))]
+                ImageUrl = posters[rnd.Next(0, (posters.Length - 1))],
+                IsInstalled = true,
+                LocalPath = Path.Combine(Environment.SpecialFolder.CommonProgramFilesX86.ToString(), "App #" + i)
             };
 
-            itemApps.Add(newApp);
+            _appsInstalledOrDownloaded.Add(newApp);
         }
     }
+
+    public async ValueTask<IEnumerable<ItemApp>> GetDownloadedOrInstalledAsync() => _appsInstalledOrDownloaded;
 }
