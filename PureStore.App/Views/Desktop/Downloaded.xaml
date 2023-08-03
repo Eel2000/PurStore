@@ -1,12 +1,143 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PureStore.App.ViewModels.Desktop"
+             xmlns:templateSelector="clr-namespace:PureStore.App.Templates"
+             xmlns:model="clr-namespace:PureStore.App.Models"
              x:Class="PureStore.App.Views.Desktop.Downloaded"
-             Title="Downloaded">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:DataType="vm:DownloadPageViewModel"
+             Title="Downloads / Install">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="Downloading" x:DataType="model:ItemApp">
+                <Border Margin="10,0,10,0" HeightRequest="70" Style="{DynamicResource itemcollection}">
+                    <Grid ColumnDefinitions="0.15*,*, *,*,Auto" Padding="5">
+                        <Image Source="{Binding ImageUrl}" Aspect="Fill"/>
+
+                        <Label Grid.Column="1" Text="{Binding Title}" Margin="10,0,0,0" VerticalOptions="CenterAndExpand"
+                                       FontFamily="OpenSansRegular"/>
+
+                        <Label Grid.Column="3" Text="{Binding PublicationDate, StringFormat='Downloading {0:dd/MM/yyyy HH:mm}'}" Margin="26,0,10,0" VerticalOptions="CenterAndExpand"
+                                       FontFamily="OpenSansRegular" HorizontalOptions="StartAndExpand"/>
+
+
+                        <ProgressBar Grid.Column="2" BackgroundColor="LightGray" Progress="0.5" ProgressColor="DarkOrange" 
+                                     HeightRequest="50" WidthRequest="270" HorizontalOptions="StartAndExpand"/>
+
+                        <HorizontalStackLayout Grid.Column="4" Spacing="10" Margin="10">
+                            <Image x:Name="reLoad" Source="{FontImage &#xf01e;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                                                HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
+                                   ToolTipProperties.Text="Re-start Downloading">
+                                <!--<Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                        </Image.GestureRecognizers>-->
+                            </Image>
+                            <Image x:Name="stop" Source="{FontImage &#xf28d;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                                                HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
+                                   ToolTipProperties.Text="Stop Downloading">
+                                <!--<Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                        </Image.GestureRecognizers>-->
+                            </Image>
+
+                            <Image x:Name="install" Source="{FontImage &#xf019;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                                                HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
+                                   ToolTipProperties.Text="Install application">
+                                <!--<Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                        </Image.GestureRecognizers>-->
+                            </Image>
+
+                            <Image x:Name="remove" Source="{FontImage &#xf2ed;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                                                HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
+                                   ToolTipProperties.Text="Remove/UnInstall application">
+                                <!--<Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                        </Image.GestureRecognizers>-->
+                            </Image>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="Downloaded" x:DataType="model:ItemApp">
+                <Border Margin="10,0,10,0" HeightRequest="70" Style="{DynamicResource itemcollection}">
+                    <Grid ColumnDefinitions="0.15*,*, *,*,Auto" Padding="5">
+                        <Image Source="{Binding ImageUrl}" Aspect="Fill"/>
+
+                        <Label Grid.Column="1" Text="{Binding Title}" Margin="10,0,0,0" VerticalOptions="CenterAndExpand"
+                                       FontFamily="OpenSansRegular"/>
+
+                        <Label Grid.Column="3" Text="{Binding PublicationDate, StringFormat='Downloaded {0:dd/MM/yyyy HH:mm}'}" Margin="10,0,0,0" VerticalOptions="CenterAndExpand"
+                                       FontFamily="OpenSansRegular"/>
+
+
+                        <Label Grid.Column="2" Text="Donwload Completed" Margin="10,0,0,0" VerticalOptions="CenterAndExpand"
+                                       FontFamily="OpenSansRegular"/>
+
+                        <HorizontalStackLayout Grid.Column="4" Spacing="10" Margin="10">
+                            <!--<Image x:Name="start" Source="{FontImage &#xf144;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                                                HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
+                                   ToolTipProperties.Text="Start Donwloading">
+                                --><!--<Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                        </Image.GestureRecognizers>--><!--
+                            </Image>-->
+
+                            <Image x:Name="stop" Source="{FontImage &#xf28d;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                                                HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
+                                   ToolTipProperties.Text="Stop Donwloading">
+                                <!--<Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                        </Image.GestureRecognizers>-->
+                            </Image>
+
+                            <Image x:Name="install" Source="{FontImage &#xf019;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                                                HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
+                                   ToolTipProperties.Text="Install application">
+                                <!--<Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                        </Image.GestureRecognizers>-->
+                            </Image>
+
+                            <Image x:Name="remove" Source="{FontImage &#xf2ed;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                                                HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
+                                   ToolTipProperties.Text="Remove/ UnInstall application">
+                                <!--<Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                        </Image.GestureRecognizers>-->
+                            </Image>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <templateSelector:DownloadItemTemplateSelector
+                    x:Key="dowloadStatus"
+                    DownloadedTemplate="{StaticResource Downloaded}"
+                    DownloadingTemplate="{StaticResource Downloading}"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="0.5*,*">
+        <Grid BackgroundColor="Transparent">
+            <SearchBar x:Name="searh" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                       Keyboard="Plain" TextTransform="Lowercase" CursorPosition="0" 
+                       TextColor="{DynamicResource Gray900}" CancelButtonColor="DarkOrange"
+                       WidthRequest="500" IsSpellCheckEnabled="True" Background="DarkOrange"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <CollectionView x:Name="appsAv" ItemsSource="{Binding Apps}" 
+                            ItemSizingStrategy="MeasureFirstItem" SelectionMode="Single"
+                            RemainingItemsThreshold="0" Margin="0,0,0,40"
+                            ItemTemplate="{StaticResource dowloadStatus}">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="1"/>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </Grid>
+    </Grid>
 </ContentPage>

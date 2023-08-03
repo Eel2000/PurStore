@@ -44,10 +44,10 @@
                   ContentTemplate="{DataTemplate views:Downloaded}"
                       Route="download"/>
 
-        <ShellContent Title="Favorites" 
+        <!--<ShellContent Title="Favorites" 
                   Icon="{FontImage &#xf004;, FontFamily=faSolid, Size=44, Color=Orange}"
                   ContentTemplate="{DataTemplate views:Favorites}"
-                      Route="fav"/>
+                      Route="fav"/>-->
 
         <ShellContent Title="Uploaded" 
                   Icon="{FontImage &#xf093;, FontFamily=faSolid, Size=44, Color=Orange}"

@@ -1,21 +1,15 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using PureStore.App.Extensions;
 using PureStore.App.Models;
-using PureStore.App.ViewModels.Desktop;
-using PureStore.App.Views.Desktop.DetailsPages;
-using System.Collections.ObjectModel;
+using PureStore.App.Services.Interfaces;
 
-namespace PureStore.App.ViewModels;
+namespace PureStore.App.Services;
 
-public partial class DesktopHomeViewModel : ObservableObject
+public class DownloadService : IDownloadService
 {
-    private ViewAppPageViewModel _pageViewModel;
-
-    [ObservableProperty]
-    private ObservableCollection<ItemApp> _apps;
+    private List<ItemApp> _appsInstalledOrDownloaded;
 
     private readonly string[] posters = new[]
-   {
+    {
         "https://wallpaper.dog/large/10852364.jpg",
         "https://wallpaper.dog/large/10852421.jpg",
         "https://wallpaper.dog/large/10716693.jpg",
@@ -26,26 +20,25 @@ public partial class DesktopHomeViewModel : ObservableObject
         "https://wallpaper.dog/large/10852347.jpg",
         "https://wallpaper.dog/large/10852356.jpg",
         "https://wallpaper.dog/large/10698945.jpg",
-        "https://wallpaper.dog/large/164795.jpg",
     };
 
-    public DesktopHomeViewModel(ViewAppPageViewModel pageViewModel)
+
+    public DownloadService()
     {
-        LoadMostDownloaded();
-        _pageViewModel = pageViewModel;
+        InitializData();
     }
 
-    private void LoadMostDownloaded()
-    {
-        Apps = new();
-        Random rnd = new();
 
-        for (int i = 0; i < 10; i++)
+    private void InitializData()
+    {
+        _appsInstalledOrDownloaded = new();
+        var rnd = new Random();
+        for (int i = 0; i < 7; i++)
         {
             var newApp = new ItemApp()
             {
                 Id = Guid.NewGuid(),
-                Title = "Calculator mp",
+                Title = Path.GetRandomFileName(),
                 Author = "Guidance show",
                 Size = 5.6f,
                 AverageOldYear = 6,
@@ -55,25 +48,15 @@ public partial class DesktopHomeViewModel : ObservableObject
                 " It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                 PublicationDate = DateTime.Now,
                 Rating = rnd.Next(2, 5),
-                ImageUrl = posters[rnd.Next(0, posters.Length - 1)]
+                ImageUrl = posters[rnd.Next(0, (posters.Length - 1))],
+                IsInstalled = rnd.NextBool(),
+                isDownloading = rnd.NextBool(20),//return random bool value with 20% probality
+                LocalPath = Path.Combine(Environment.SpecialFolder.CommonProgramFilesX86.ToString(), "App #" + i)
             };
 
-            Apps.Add(newApp);
+            _appsInstalledOrDownloaded.Add(newApp);
         }
     }
 
-    [RelayCommand]
-    Task ShowDetails(object arg)
-    {
-        try
-        {
-            //Shell.Current.GoToAsync("//viewApp");
-            Shell.Current.Navigation.PushModalAsync(new ViewAppPage(arg as ItemApp, _pageViewModel), true);
-            return Task.CompletedTask;
-        }
-        catch (Exception)
-        {
-            return Task.CompletedTask;
-        }
-    }
+    public async ValueTask<IEnumerable<ItemApp>> GetDownloadedOrInstalledAsync() => _appsInstalledOrDownloaded;
 }

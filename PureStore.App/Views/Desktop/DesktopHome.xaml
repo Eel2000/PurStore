@@ -116,7 +116,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Border x:Name="itemFram"  Style="{StaticResource HoverFrameStyle}"
-                           HeightRequest="260" WidthRequest="180"  
+                           HeightRequest="260" WidthRequest="250"  
                                BackgroundColor="Transparent" >
                             <Border.GestureRecognizers>
                                 <PointerGestureRecognizer PointerEntered="PointerGestureRecognizer_PointerEntered"
