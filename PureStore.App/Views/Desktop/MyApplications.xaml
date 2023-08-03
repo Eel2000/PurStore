@@ -1,12 +1,126 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PureStore.App.ViewModels.Desktop"
+             xmlns:templateSelector="clr-namespace:PureStore.App.Templates"
+             xmlns:model="clr-namespace:PureStore.App.Models"
              x:Class="PureStore.App.Views.Desktop.MyApplications"
+             x:DataType="vm:MyApplicationPageViewModel"
              Title="MyApplications">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="Uploading" x:DataType="model:Upload">
+                <Border Margin="10,0,10,0" HeightRequest="70" Style="{DynamicResource itemcollection}">
+                    <Grid ColumnDefinitions="0.15*,*, *,*,Auto" Padding="5">
+                        <Image Source="{Binding ImageUrl}" Aspect="Fill"/>
+
+                        <Label Grid.Column="1" Text="{Binding Title}" Margin="10,0,0,0" VerticalOptions="CenterAndExpand"
+                                       FontFamily="OpenSansRegular"/>
+
+                        <Label Grid.Column="3" Text="{Binding Uploaded, StringFormat='Uploading {0:dd/MM/yyyy HH:mm}'}" Margin="26,0,10,0" VerticalOptions="CenterAndExpand"
+                                       FontFamily="OpenSansRegular" HorizontalOptions="StartAndExpand"/>
+
+
+                        <ProgressBar Grid.Column="2" BackgroundColor="LightGray" Progress="0.5" ProgressColor="DarkOrange" 
+                                     HeightRequest="50" WidthRequest="270" HorizontalOptions="StartAndExpand"/>
+
+                        <HorizontalStackLayout Grid.Column="4" Spacing="10" Margin="10">
+                            <Image x:Name="reLoad" Source="{FontImage &#xf093;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                                                HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
+                                   ToolTipProperties.Text="Re-start Uploading">
+                                <!--<Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                        </Image.GestureRecognizers>-->
+                            </Image>
+                            <Image x:Name="stop" Source="{FontImage &#xf28d;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                                                HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
+                                   ToolTipProperties.Text="Stop Uploading">
+                                <!--<Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                        </Image.GestureRecognizers>-->
+                            </Image>
+
+                            <Image x:Name="remove" Source="{FontImage &#xf2ed;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                                                HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
+                                   ToolTipProperties.Text="Remove/UnInstall application">
+                                <!--<Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                        </Image.GestureRecognizers>-->
+                            </Image>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="Uploaded" x:DataType="model:Upload">
+                <Border Margin="10,0,10,0" HeightRequest="70" Style="{DynamicResource itemcollection}">
+                    <Grid ColumnDefinitions="0.15*,*, *,*,Auto" Padding="5">
+                        <Image Source="{Binding ImageUrl}" Aspect="Fill"/>
+
+                        <Label Grid.Column="1" Text="{Binding Title}" Margin="10,0,0,0" VerticalOptions="CenterAndExpand"
+                                       FontFamily="OpenSansRegular"/>
+
+                        <Label Grid.Column="3" Text="{Binding Uploaded, StringFormat='Uploading {0:dd/MM/yyyy HH:mm}'}" Margin="10,0,0,0" VerticalOptions="CenterAndExpand"
+                                       FontFamily="OpenSansRegular"/>
+
+
+                        <Label Grid.Column="2" Text="Upload Completed" Margin="10,0,0,0" VerticalOptions="CenterAndExpand"
+                                       FontFamily="OpenSansRegular"/>
+
+                        <HorizontalStackLayout Grid.Column="4" Spacing="10" Margin="10">
+
+                            <Image x:Name="stop" Source="{FontImage &#xf28d;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                                                HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
+                                   ToolTipProperties.Text="Stop Uploading">
+                                <!--<Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                        </Image.GestureRecognizers>-->
+                            </Image>
+
+                            <Image x:Name="remove" Source="{FontImage &#xf2ed;, FontFamily=faSolid, Size=60, Color=Orange}" 
+                                                HeightRequest="20" WidthRequest="20" Style="{x:StaticResource ArrowBackStyle}"
+                                   ToolTipProperties.Text="Remove/ UnInstall application">
+                                <!--<Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                                        </Image.GestureRecognizers>-->
+                            </Image>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <templateSelector:UploadAppTemplateSelector
+                    x:Key="uploadStatus"
+                    UploadedTemplate="{StaticResource Uploaded}"
+                    UploadingTemplate="{StaticResource Uploading}"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="0.5*,*">
+        <Grid BackgroundColor="Transparent" ColumnDefinitions="Auto, Auto" ColumnSpacing="5" Margin="10,20,0,0"
+              HorizontalOptions="CenterAndExpand">
+            <SearchBar x:Name="searh" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                       Keyboard="Plain" TextTransform="Lowercase" CursorPosition="0" 
+                       TextColor="{DynamicResource Gray900}" CancelButtonColor="DarkOrange"
+                       WidthRequest="500" IsSpellCheckEnabled="True" Background="DarkOrange"/>
+
+            <ImageButton Grid.Column="1" Source="{FontImage &#xf093;, FontFamily=faSolid, Size=25, Color=Black}"
+                         WidthRequest="100" HeightRequest="40" CornerRadius="4" 
+                         ToolTipProperties.Text="Upload new application"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <CollectionView x:Name="appsAv" ItemsSource="{Binding Apps}" 
+                            ItemSizingStrategy="MeasureFirstItem" SelectionMode="Single"
+                            RemainingItemsThreshold="0" Margin="0,0,0,40"
+                            ItemTemplate="{StaticResource uploadStatus}">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="1"/>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </Grid>
+    </Grid>
 </ContentPage>

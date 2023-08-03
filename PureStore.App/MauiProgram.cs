@@ -43,12 +43,16 @@ namespace PureStore.App
 
             builder.Services.AddTransient<Downloaded>();
             builder.Services.AddTransient<DownloadPageViewModel>();
+
+            builder.Services.AddTransient<MyApplications>();
+            builder.Services.AddSingleton<MyApplicationPageViewModel>();
             //--------------------------------------------//
 
 
             //---------------Services----------------------//
             builder.Services.AddSingleton<IStoreService, StoreService>();
             builder.Services.AddSingleton<IDownloadService, DownloadService>();
+            builder.Services.AddSingleton<IUploadingService, UploadingService>();
             //--------------------------------------------//
             #endregion
 
