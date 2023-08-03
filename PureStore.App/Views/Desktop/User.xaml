@@ -3,18 +3,100 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PureStore.App.Views.Desktop.User"
              Title="Settings">
-    
-    <VerticalStackLayout>
-        <Label
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
 
-        <Button x:Name="btnChangeTheme" BackgroundColor="{StaticResource Primary}" 
-                FontFamily="OpenSansRegular" Text="Change theme"
-                HeightRequest="40" CornerRadius="10"
-                TextColor="{DynamicResource White}"
-                HorizontalOptions="Center" Clicked="btnChangeTheme_Clicked"/>
-    </VerticalStackLayout>
-        
+    <ScrollView>
+        <Grid RowDefinitions="Auto, *">
+            <Grid ColumnDefinitions="0.2*,*" Padding="20" ColumnSpacing="10">
+                <Border WidthRequest="200" HeightRequest="250" 
+                        BackgroundColor="White">
+                    <Grid>
+                        <Label Text="U"
+                               FontSize="100"
+                               FontFamily="OpenSansRegular"
+                               TextColor="{DynamicResource Gray950}"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="Center"/>
+                    </Grid>
+                </Border>
+
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" Spacing="5">
+                    <Label Text="Username"/>
+                    <Label Text="Account Type"/>
+
+                    <Button Text="Sync Account"
+                            WidthRequest="200"
+                            HorizontalOptions="StartAndExpand"
+                            Margin="0,20,0,0"
+                            Style="{DynamicResource BtnDownload}"/>
+                </VerticalStackLayout>
+
+            </Grid>
+            <VerticalStackLayout Grid.Row="1" Margin="30,0,0,60" Spacing="30">
+
+                <BoxView BackgroundColor="Gray"
+                         HeightRequest="1" WidthRequest="1200"
+                         HorizontalOptions="StartAndExpand"
+                         VerticalOptions="StartAndExpand"
+                         Margin="0,30,30,0"/>
+
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="API KEY" FontFamily="OpenSansRegular"/>
+                    <HorizontalStackLayout Spacing="5">
+                        <Border Padding="10" WidthRequest="600" HorizontalOptions="StartAndExpand">
+                            <Label Text="YOUR GENERATED API KEY TO UPLOAD APPS OUR SERVER" FontFamily="OpenSansRegular"/>
+                        </Border>
+
+                        <HorizontalStackLayout Spacing="5">
+                            <ImageButton Source="{FontImage &#xf0c5;, Color=Gray, FontFamily=faRegular, Size=20}"
+                                         ToolTipProperties.Text="Copy Key"/>
+
+                            <ImageButton Source="{FontImage &#x2b;, Color=Gray, FontFamily=faBrandRegular, Size=20}"
+                                         ToolTipProperties.Text="New Key: Note that the old one will be invalidated/Deleted and Your must be authenticated"/>
+                        </HorizontalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+
+                <BoxView BackgroundColor="Gray"
+                         HeightRequest="1" WidthRequest="1200"
+                         HorizontalOptions="StartAndExpand"
+                         VerticalOptions="StartAndExpand"
+                         Margin="0,30,30,0"/>
+
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="DEFAULT SAVING LOCATION" FontFamily="OpenSansRegular"/>
+                    <HorizontalStackLayout Spacing="5">
+                        <Border Padding="10" WidthRequest="600" HorizontalOptions="StartAndExpand">
+                            <Label Text="C:/My apps" FontFamily="OpenSansRegular"/>
+                        </Border>
+
+                        <ImageButton Source="{FontImage &#xf07c;, Color=Gray, FontFamily=faRegular, Size=20}"
+                                     ToolTipProperties.Text="Change saving location"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+
+                <BoxView BackgroundColor="Gray"
+                         HeightRequest="1" WidthRequest="1200"
+                         HorizontalOptions="StartAndExpand"
+                         VerticalOptions="StartAndExpand"
+                         Margin="0,30,30,0"/>
+
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="UPLOADED APPLICATIONS" FontFamily="OpenSansRegular"/>
+                    <HorizontalStackLayout Spacing="5">
+                        <Border Padding="10" WidthRequest="60" HorizontalOptions="StartAndExpand">
+                            <Label Text="0"
+                                   FontSize="Subtitle"
+                                   FontFamily="OpenSansRegular"
+                                   HorizontalTextAlignment="Center"/>
+                        </Border>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+
 </ContentPage>
