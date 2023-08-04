@@ -12,10 +12,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
     <PackageReference Include="MlkPwgen" Version="0.3.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.20.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositories\" />
+    <PackageReference Include="ServiceStack.Core" Version="6.10.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,9 +1,13 @@
-﻿namespace PureStore.Domain.Common
+﻿using MongoDB.Bson.Serialization.Attributes;
+
+namespace PureStore.Domain.Common;
+
+#nullable disable
+public class BaseEntity
 {
-    public class BaseEntity
-    {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public DateTime Created { get; set; } = DateTime.Now;
-        public DateTime Updated { get; set; }
-    }
+    [BsonId]
+    [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+    public string Id { get; set; }
+    public DateTime Created { get; set; } = DateTime.Now;
+    public DateTime Updated { get; set; }
 }
