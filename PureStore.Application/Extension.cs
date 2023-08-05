@@ -12,6 +12,7 @@ namespace PureStore.Application
                 config.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
             });
 
+
             return services;
         }
     }
