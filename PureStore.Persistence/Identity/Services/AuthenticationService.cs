@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
 
 namespace PureStore.Persistence.Identity.Services;
 
@@ -15,29 +16,32 @@ public class AuthenticationService : IAuthenticationService
 {
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly UserManager<ApplicationUser> _userManager;
-    private readonly JWTSettings _jwtSettings;
-    private readonly Keys _keys;
+    private readonly IConfiguration _configuration;
 
     public AuthenticationService(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager,
-        IOptions<JWTSettings> jwtSettings, IOptions<Keys> keys)
+        IConfiguration configuration)
     {
         _signInManager = signInManager;
         _userManager = userManager;
-        _jwtSettings = jwtSettings.Value;
-        _keys = keys.Value;
+        _configuration = configuration;
     }
 
-    public async ValueTask<Response<object>> AuthenticateAsync(Auth auth)
+    public async ValueTask<AuthResponse> AuthenticateAsync(Auth auth)
     {
         var user = await _userManager.FindByNameAsync(auth.Username);
         var authResult = await _signInManager.PasswordSignInAsync(user, auth.Password, false, false);
         if (authResult.Succeeded)
         {
             var token = await JwtSecurityTokenAsync(user);
-            return new Response<object>(token, "Authenticated successfully");
+            return new()
+            {
+                Username = user.UserName,
+                Email = user.Email,
+                Token = token,
+            };
         }
 
-        return new Response<object>(default, "Failed to authenticated, password or username is incorrect");
+        return default;
     }
 
     public ValueTask<Response<string>> GetApiKeyAsync(Auth auth)
@@ -45,10 +49,10 @@ public class AuthenticationService : IAuthenticationService
         throw new NotImplementedException();
     }
 
-    public async ValueTask<Response<object>> RegisterAsync(RegisterDTO user)
+    public async ValueTask<AuthResponse> RegisterAsync(RegisterDTO user)
     {
         if (!await ValidateUserAsync(user))
-            return new Response<object>(user, "Email or Username already taken");
+            throw new KeyNotFoundException("Email or Username already taken");
 
         var registration = await _userManager.CreateAsync(user, user.Password);
         if (registration.Succeeded)
@@ -56,10 +60,15 @@ public class AuthenticationService : IAuthenticationService
             var appUser = await _userManager.FindByNameAsync(user.Username);
             if (appUser == null) throw new KeyNotFoundException("User not found please retry the registration process");
 
-            return new Response<object>(await JwtSecurityTokenAsync(appUser), "Registred successfully");
+            return new()
+            {
+                Username = appUser.UserName,
+                Email = appUser.Email,
+                Token = await JwtSecurityTokenAsync(appUser)
+            };
         }
 
-        return new Response<object>(null, "Registration failed check the credentials and info provided");
+        throw new OperationCanceledException("Registration failed check the credentials and info provided");
     }
 
 
@@ -100,14 +109,14 @@ public class AuthenticationService : IAuthenticationService
         .Union(userClaims)
         .Union(roleClaims);
 
-        var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_keys.CryptorKey));
+        var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWTSettings:Key"]));
         var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
 
         var jwtSecurityToken = new JwtSecurityToken(
-            issuer: _jwtSettings.Issuer,
-            audience: _jwtSettings.Audience,
+            issuer: _configuration["JWTSettings:Issuer"],
+            audience: _configuration["JWTSettings:Audience"],
             claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(_jwtSettings.DurationInMinutes),
+            expires: DateTime.UtcNow.AddMinutes(int.Parse(_configuration["JWTSettings:DurationInMinutes"])),
             signingCredentials: signingCredentials);
 
         var token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);

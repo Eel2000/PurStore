@@ -7,7 +7,7 @@ namespace PureStore.Application.Features.Identity.Commands;
 
 public class RegistrationCommand : IRequest<Response<object>>
 {
-    public RegisterDTO Register { get; private set; }
+    public RegisterDTO Register { get; set; }
 
     public RegistrationCommand(RegisterDTO register)
     {
@@ -33,6 +33,6 @@ public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, R
         ArgumentException.ThrowIfNullOrEmpty(request.Register.Password, "Password");
 
         var response = await _authenticationService.RegisterAsync(request.Register);
-        return response;
+        return new Response<object>(response, "Registration completed successfully!");
     }
 }
