@@ -1,5 +1,4 @@
 ﻿using PureStore.Domain.Common;
-using PureStore.Domain.DTOs.Feedbacks;
 
 namespace PureStore.Domain.Entities;
 
@@ -20,15 +19,5 @@ public class Feedback : BaseEntity
 
             return Username.Remove(2, Username.Length - 2).ToUpper();
         }
-    }
-
-    public static implicit operator Feedback(FeedBackDTO feed)
-    {
-        return new Feedback
-        {
-            Content = feed.Content,
-            Username = feed.Username,
-            Rating = feed.Rating,
-        };
     }
 }
