@@ -48,55 +48,56 @@ builder.Services.AddSwaggerGen(c =>
     }
 });
 
-    builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    })
-    .AddJwtBearer(o =>
-                   {
-                       o.RequireHttpsMetadata = false;
-                       o.SaveToken = false;
-                       o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                       {
-
-                           ValidateIssuerSigningKey = true,
-                           ValidateIssuer = true,
-                           ValidateAudience = true,
-                           ValidateLifetime = true,
-                           ClockSkew = TimeSpan.Zero,
-                           ValidIssuer = builder.Configuration["JWTSettings:Issuer"],
-                           ValidAudience = builder.Configuration["JWTSettings:Audience"],
-                           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWTSettings:Key"]))
-                       };
-                       o.Events = new JwtBearerEvents
-                       {
-                           OnAuthenticationFailed = a =>
-                           {
-                               a.Response.StatusCode = 401;
-                               a.Response.ContentType = "application/json";
-                               return a.Response.WriteAsJsonAsync(new Response<string>("You are not authorized"));
-                           },
-                           OnChallenge = context =>
-                           {
-                               context.HandleResponse();
-                               if (!context.Response.HasStarted)
-                               {
-                                   context.Response.StatusCode = 401;
-                                   context.Response.ContentType = "application/json";
-                               }
-                               return context.Response.WriteAsJsonAsync(new Response<string>("You are not authorized"));
-                           },
-                           OnForbidden = context =>
-                           {
-                               context.Response.StatusCode = 403;
-                               context.Response.ContentType = "application/json";
-                               return context.Response.WriteAsJsonAsync(new Response<string>("You are not authorized"));
-                           }
-                       };
-
-                   });
 });
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(o =>
+               {
+                   o.RequireHttpsMetadata = false;
+                   o.SaveToken = false;
+                   o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                   {
+
+                       ValidateIssuerSigningKey = true,
+                       ValidateIssuer = true,
+                       ValidateAudience = true,
+                       ValidateLifetime = true,
+                       ClockSkew = TimeSpan.Zero,
+                       ValidIssuer = builder.Configuration["JWTSettings:Issuer"],
+                       ValidAudience = builder.Configuration["JWTSettings:Audience"],
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWTSettings:Key"]))
+                   };
+                   o.Events = new JwtBearerEvents
+                   {
+                       OnAuthenticationFailed = a =>
+                       {
+                           a.Response.StatusCode = 401;
+                           a.Response.ContentType = "application/json";
+                           return a.Response.WriteAsJsonAsync(new Response<string>("You are not authorized"));
+                       },
+                       OnChallenge = context =>
+                       {
+                           context.HandleResponse();
+                           if (!context.Response.HasStarted)
+                           {
+                               context.Response.StatusCode = 401;
+                               context.Response.ContentType = "application/json";
+                           }
+                           return context.Response.WriteAsJsonAsync(new Response<string>("You are not authorized"));
+                       },
+                       OnForbidden = context =>
+                       {
+                           context.Response.StatusCode = 403;
+                           context.Response.ContentType = "application/json";
+                           return context.Response.WriteAsJsonAsync(new Response<string>("You are not authorized"));
+                       }
+                   };
+
+               });
 
 builder.Services.AddApplicationLayer();
 builder.Services.AddPersistenceLayer(builder.Configuration);
@@ -112,6 +113,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 
