@@ -1,9 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PureStore.Application.Interfaces.Identity;
 using PureStore.Application.Interfaces.Repositories;
 using PureStore.Domain.Common;
 using PureStore.Persistence.Contexts;
 using PureStore.Persistence.Helpers;
+using PureStore.Persistence.Identity.Models;
+using PureStore.Persistence.Identity.Services;
 using PureStore.Persistence.Repositories;
 
 namespace PureStore.Persistence;
@@ -14,6 +18,11 @@ public static class Extension
     {
         services.ConfigureSettings(configuration);
 
+
+        services.AddIdentity<ApplicationUser, ApplicationRole>()
+            .AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>(configuration.GetConnectionString("Mongo"), Constants.DATABASE_NAME)
+            .AddDefaultTokenProviders();
+
         services.AddTransient<IMongoContext, MongoContext>();
 
         #region Repositories registrations
@@ -21,7 +30,18 @@ public static class Extension
         services.AddTransient<IFeedbackRepositoryAsync, FeedbackRepositoryAsync>();
         #endregion
 
+        services.RegisterServices();
+
         return services;
+    }
+
+    /// <summary>
+    /// Register the application modules services
+    /// </summary>
+    /// <param name="services"></param>
+    public static void RegisterServices(this IServiceCollection services)
+    {
+        services.AddTransient<IAuthenticationService, AuthenticationService>();
     }
 
     /// <summary>
