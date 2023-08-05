@@ -4,6 +4,7 @@ namespace PureStore.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [NonController]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

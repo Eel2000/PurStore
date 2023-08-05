@@ -5,8 +5,8 @@ namespace PureStore.Application.Interfaces.Identity
 {
     public interface IAuthenticationService
     {
-        ValueTask<Response<object>> AuthenticateAsync(Auth auth);
-        ValueTask<Response<object>> RegisterAsync(RegisterDTO user);
+        ValueTask<AuthResponse> AuthenticateAsync(Auth auth);
+        ValueTask<AuthResponse> RegisterAsync(RegisterDTO user);
         ValueTask<Response<string>> GetApiKeyAsync(Auth auth);
     }
 }
