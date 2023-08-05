@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PureStore.Application.Interfaces.Repositories;
 using PureStore.Domain.Common;
 using PureStore.Persistence.Contexts;
 using PureStore.Persistence.Helpers;
+using PureStore.Persistence.Identity.Models;
 using PureStore.Persistence.Repositories;
 
 namespace PureStore.Persistence;
@@ -13,6 +15,11 @@ public static class Extension
     public static IServiceCollection AddPersistenceLayer(this IServiceCollection services, IConfiguration configuration)
     {
         services.ConfigureSettings(configuration);
+
+
+        services.AddIdentity<ApplicationUser, ApplicationRole>()
+            .AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>(configuration.GetConnectionString("Mongo"), Constants.DATABASE_NAME)
+            .AddDefaultTokenProviders();
 
         services.AddTransient<IMongoContext, MongoContext>();
 

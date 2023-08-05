@@ -1,6 +1,6 @@
 ﻿using PureStore.Domain.Entities;
 
-namespace PureStore.Application.DTOs.Feedbacks
+namespace PureStore.Domain.DTOs.Feedbacks
 {
     public record FeedBackDTO(string Content, double Rating, string Username)
     {
