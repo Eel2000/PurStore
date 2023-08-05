@@ -16,7 +16,7 @@ public class AuthenticationCommandTest
     public void Command_Should_Throw_Exception_When_Params_Are_Missing()
     {
         //Arrange
-        var command = new AuthenticationCommand(default);
+        var command = new AuthenticationCommand(It.IsAny<Auth>());
         var sut = new AuthenticationCommandHandler(_authenticationService.Object);
 
         //Act
@@ -30,7 +30,7 @@ public class AuthenticationCommandTest
     public void Command_Should_Throw_Exception_When_One_Param_Field_IsMissing()
     {
         //Arrange
-        Auth auth = new(default, "12345");
+        Auth auth = new(It.IsAny<string>(), "12345");
         var command = new AuthenticationCommand(auth);
 
         var sut = new AuthenticationCommandHandler(_authenticationService.Object);
