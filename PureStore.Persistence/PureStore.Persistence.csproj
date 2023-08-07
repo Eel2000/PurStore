@@ -22,8 +22,4 @@
     <ProjectReference Include="..\PureStore.Application\PureStore.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

@@ -8,6 +8,6 @@ namespace PureStore.Persistence.Helpers
 {
     public class Constants
     {
-        public const string DATABASE_NAME = "PureStore";
+        public const string DATABASE_NAME = "PureStoreDatabase";
     }
 }

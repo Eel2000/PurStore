@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using PureStore.Application.DTOs.Identity;
 using PureStore.Application.Interfaces.Identity;
 using PureStore.Domain.Common;
 using PureStore.Persistence.Identity.Models;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.Extensions.Configuration;
 
 namespace PureStore.Persistence.Identity.Services;
 
@@ -28,6 +27,8 @@ public class AuthenticationService : IAuthenticationService
 
     public async ValueTask<AuthResponse> AuthenticateAsync(Auth auth)
     {
+        ArgumentNullException.ThrowIfNull(auth);
+
         var user = await _userManager.FindByNameAsync(auth.Username);
         var authResult = await _signInManager.PasswordSignInAsync(user, auth.Password, false, false);
         if (authResult.Succeeded)

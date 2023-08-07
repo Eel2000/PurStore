@@ -3,12 +3,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PureStore.Application.Interfaces.Identity;
 using PureStore.Application.Interfaces.Repositories;
+using PureStore.Application.Interfaces.Services;
 using PureStore.Domain.Common;
 using PureStore.Persistence.Contexts;
 using PureStore.Persistence.Helpers;
 using PureStore.Persistence.Identity.Models;
 using PureStore.Persistence.Identity.Services;
 using PureStore.Persistence.Repositories;
+using PureStore.Persistence.Services;
 
 namespace PureStore.Persistence;
 
@@ -28,6 +30,7 @@ public static class Extension
         #region Repositories registrations
         services.AddTransient<IUploadedApplicationRepositoryAsync, UploadedApplicationRepositoryAsync>();
         services.AddTransient<IFeedbackRepositoryAsync, FeedbackRepositoryAsync>();
+        services.AddTransient<IDownloadingRepository, DownloadingRepository>();
         #endregion
 
         services.RegisterServices();
@@ -42,6 +45,7 @@ public static class Extension
     public static void RegisterServices(this IServiceCollection services)
     {
         services.AddTransient<IAuthenticationService, AuthenticationService>();
+        services.AddTransient<IUploadApplicationService, UploadApplicationService>();
     }
 
     /// <summary>
@@ -55,7 +59,7 @@ public static class Extension
 
         services.Configure<DBSetting>(setting =>
         {
-            setting.ConnectionString = configuration.GetConnectionString("Default");
+            setting.ConnectionString = configuration.GetConnectionString("Mongo");
             setting.DatabaseName = Constants.DATABASE_NAME;
         });
 
