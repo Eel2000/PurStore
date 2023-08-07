@@ -9,4 +9,5 @@ public interface IUploadApplicationService
     ValueTask<UploadedApplication> RemoveAsync(string id);
     ValueTask<IEnumerable<UploadedApplication>> GetAllAsync();
     ValueTask<UploadedApplication> DownloadAppAsync(string applicationId);
+    ValueTask<IEnumerable<UploadedApplication>> GetAllAsync(int page, int pageSize);
 }

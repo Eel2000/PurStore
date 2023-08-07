@@ -52,7 +52,7 @@ namespace PureStore.API.EndPoints.Upload
 
         public async ValueTask<IResult> GetDownload(IMediator mediator, [FromQuery] string applicationId)
         {
-            var result = await mediator.Send(new DownloadCommand(applicationId));
+            var result = await mediator.Send(new DownloadQuery(applicationId));
 
             return TypedResults.Ok(result);
         }
@@ -60,6 +60,13 @@ namespace PureStore.API.EndPoints.Upload
         public async ValueTask<IResult> GetListApp(IMediator mediator)
         {
             var result = await mediator.Send(new GetAllAppQueries());
+
+            return TypedResults.Ok(result);
+        }
+
+        public async ValueTask<IResult> GetListPaged(IMediator mediator, [FromQuery] int page, [FromQuery] int size)
+        {
+            var result = await mediator.Send(new GetPagedDataQuery(page, size));
 
             return TypedResults.Ok(result);
         }
