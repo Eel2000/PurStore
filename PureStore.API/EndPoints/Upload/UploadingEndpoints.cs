@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using PureStore.API.Abstractions;
 using PureStore.Application.DTOs.UploadApps;
@@ -17,9 +18,17 @@ namespace PureStore.API.EndPoints.Upload
 
             baseGroup.MapGet("/download", GetDownload);
 
-            baseGroup.MapPost("/Upload", UploadAppPost);
+            baseGroup.MapPost("/Upload", UploadAppPost).RequireAuthorization(d =>
+            {
+                d.RequireAuthenticatedUser();
+                d.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+            });
 
-            baseGroup.MapDelete("/remove", DeleteApp);
+            baseGroup.MapDelete("/remove", DeleteApp).RequireAuthorization(d =>
+            {
+                d.RequireAuthenticatedUser();
+                d.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+            });
 
         }
 

@@ -51,7 +51,7 @@ public class GenericRepositoryAsync<T> : IGenericRepositoryAsync<T> where T : cl
 
     public async Task<IEnumerable<T>> ToListAsync(Expression<Func<T, bool>> expression)
     {
-        return await _collection.Find(expression).ToListAsync();
+        return _collection.Find(expression).ToList();
     }
 
     public async Task UpdateAsync(T entity)

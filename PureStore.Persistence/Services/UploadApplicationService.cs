@@ -54,6 +54,11 @@ namespace PureStore.Persistence.Services
 
         public async ValueTask UploadNewAsync(UploadApp app)
         {
+            var existingWithSamName = await _uploadedApplicationRepositoryAsync
+                .FirstOrDefaultAsync(x => x.Title.ToLower() == app.Title.ToLower());
+            if (existingWithSamName is not null)
+                throw new OperationCanceledException("Application title or name is already taken, please choose another one!");
+
             UploadedApplication application = app;
             application.IsActive = true;
 
