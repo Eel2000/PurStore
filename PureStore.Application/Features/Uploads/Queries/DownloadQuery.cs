@@ -5,26 +5,26 @@ using PureStore.Domain.Entities;
 
 namespace PureStore.Application.Features.Uploads.Queries
 {
-    public class DownloadCommand : IRequest<Response<UploadedApplication>>
+    public class DownloadQuery : IRequest<Response<UploadedApplication>>
     {
         public string ApplicationId { get; private set; }
 
-        public DownloadCommand(string applicationId)
+        public DownloadQuery(string applicationId)
         {
             ApplicationId = applicationId;
         }
     }
 
-    public class DownloadCommandHandler : IRequestHandler<DownloadCommand, Response<UploadedApplication>>
+    public class DownloadQueryHandler : IRequestHandler<DownloadQuery, Response<UploadedApplication>>
     {
         private readonly IUploadApplicationService _uploadApplicationService;
 
-        public DownloadCommandHandler(IUploadApplicationService uploadApplicationService)
+        public DownloadQueryHandler(IUploadApplicationService uploadApplicationService)
         {
             _uploadApplicationService = uploadApplicationService;
         }
 
-        public async Task<Response<UploadedApplication>> Handle(DownloadCommand request, CancellationToken cancellationToken)
+        public async Task<Response<UploadedApplication>> Handle(DownloadQuery request, CancellationToken cancellationToken)
         {
             var response = await _uploadApplicationService.DownloadAppAsync(request.ApplicationId);
             if (response == null)

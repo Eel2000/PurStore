@@ -19,6 +19,9 @@ namespace PureStore.Persistence.Services
         public async ValueTask<IEnumerable<UploadedApplication>> GetAllAsync()
             => await _uploadedApplicationRepositoryAsync.ToListAsync(x => x.IsActive == true);
 
+        public async ValueTask<IEnumerable<UploadedApplication>> GetAllAsync(int page, int pageSize)
+            => await _uploadedApplicationRepositoryAsync.GetPagedReponseAsync(page, pageSize);
+
         public async ValueTask<UploadedApplication> RemoveAsync(string id)
         {
             var data = await _uploadedApplicationRepositoryAsync.FirstOrDefaultAsync(x => x.Id == id);
