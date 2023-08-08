@@ -26,9 +26,29 @@ namespace PureStore.Application.Features.Uploads.Commands
 
         public async Task<Response<string>> Handle(UploadAppCommand request, CancellationToken cancellationToken)
         {
+            ArgumentNullException.ThrowIfNull(request, nameof(request));
+
+            ArgumentException.ThrowIfNullOrEmpty(request.App.Title, "Title");
+            ArgumentException.ThrowIfNullOrEmpty(request.App.Description, "Description");
+            ArgumentException.ThrowIfNullOrEmpty(request.App.AppUrl, "AppUrl");
+
+            if (request.App.Title.Equals("string", comparisonType: StringComparison.OrdinalIgnoreCase))
+                throw new ArgumentOutOfRangeException("Title", request.App.Title, "Value not allowed");
+
+            if (request.App.Description.Equals("string", comparisonType: StringComparison.OrdinalIgnoreCase))
+                throw new ArgumentOutOfRangeException("Description", request.App.Description, "Value not allowed");
+
+            if (request.App.Author.Equals("string", comparisonType: StringComparison.OrdinalIgnoreCase))
+                throw new ArgumentOutOfRangeException("Author", request.App.Author, "Value not allowed");
+
+            if (request.App.AppUrl.Equals("string", comparisonType: StringComparison.OrdinalIgnoreCase))
+                throw new ArgumentOutOfRangeException("AppUrl", request.App.AppUrl, "Value not allowed");
+
+
+
             await _uploadApplicationService.UploadNewAsync(request.App);
 
-            return new Response<string>(default, "Upload completed!");
+            return new Response<string>(string.Empty, "Upload completed!");
         }
     }
 }
