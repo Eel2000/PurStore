@@ -9,3 +9,6 @@ global using PureStore.Application.DTOs.UploadApps;
 global using PureStore.Application.Interfaces.Identity;
 global using PureStore.Test.Mocks.Identity;
 global using PureStore.Application.Interfaces.Services;
+global using PureStore.Domain.Common;
+global using PureStore.Domain.Entities;
+global using PureStore.Test.Mocks.Uploads;
