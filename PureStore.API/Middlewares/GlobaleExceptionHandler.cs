@@ -24,6 +24,7 @@ public class GlobaleExceptionHandler : IMiddleware
                 ErrorCode = StatusCodes.Status500InternalServerError
             };
 
+
             var data = new Response<object>(false, error, ex.Message + "\n if that persiste contacts the admin.");
 
             await response.WriteAsync(JsonConvert.SerializeObject(data));
