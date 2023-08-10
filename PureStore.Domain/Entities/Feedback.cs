@@ -7,6 +7,7 @@ public class Feedback : BaseEntity
     public required string Content { get; set; }
     public required string Username { get; set; }
     public required double Rating { get; set; }
+    public required string ApplicationId { get; set; }
 
     public string Initials
     {

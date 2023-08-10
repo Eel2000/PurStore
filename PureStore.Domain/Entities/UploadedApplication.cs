@@ -1,9 +1,15 @@
 ﻿using PureStore.Domain.Common;
+using System.Collections.ObjectModel;
 
 namespace PureStore.Domain.Entities;
 
 public class UploadedApplication : BaseEntity
 {
+    public UploadedApplication()
+    {
+        Feedbacks = new();
+    }
+
     public string? ImageUrl { get; set; }
     public required string Title { get; set; }
     public required string Description { get; set; }
@@ -14,4 +20,6 @@ public class UploadedApplication : BaseEntity
     public bool Completed { get; set; }
     public int MinYearOld { get; set; }
     public required float Size { get; set; }
+
+    public Collection<Feedback> Feedbacks { get; set; }
 }
