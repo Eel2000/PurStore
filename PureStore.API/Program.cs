@@ -1,4 +1,5 @@
 using PureStore.API.Extension;
+using PureStore.API.Middlewares;
 using PureStore.Application;
 using PureStore.Persistence;
 
@@ -18,6 +19,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<GlobaleExceptionHandler>();
 app.UseHttpsRedirection();
 
 //app.UseCors();to configure later

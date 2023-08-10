@@ -37,4 +37,12 @@ public class Response<T>
         Errors = errors;
         Data = data;
     }
+
+    public Response(bool succeeded, T data, string meessage = "", string[]? errors = default)
+    {
+        Succeeded = succeeded;
+        Message = meessage;
+        Errors = errors;
+        Data = data;
+    }
 }

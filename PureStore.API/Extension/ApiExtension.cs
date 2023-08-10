@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PureStore.API.Abstractions;
+using PureStore.API.Middlewares;
 using PureStore.Domain.Common;
 using System.Text;
 
@@ -16,6 +17,8 @@ namespace PureStore.API.Extension
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddTransient<GlobaleExceptionHandler>();
 
 
             builder.Services.AddSwaggerGen(c =>
