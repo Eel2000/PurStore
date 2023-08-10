@@ -1,3 +1,4 @@
+using PureStore.Application.DTOs.Feedbacks;
 using PureStore.Application.DTOs.UploadApps;
 using PureStore.Domain.Entities;
 
@@ -10,4 +11,5 @@ public interface IUploadApplicationService
     ValueTask<IEnumerable<UploadedApplication>> GetAllAsync();
     ValueTask<UploadedApplication> DownloadAppAsync(string applicationId);
     ValueTask<IEnumerable<UploadedApplication>> GetAllAsync(int page, int pageSize);
+    ValueTask PublishFeedBack(FeedBackDTO feed);
 }

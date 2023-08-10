@@ -1,4 +1,5 @@
-﻿using PureStore.Application.DTOs.UploadApps;
+﻿using PureStore.Application.DTOs.Feedbacks;
+using PureStore.Application.DTOs.UploadApps;
 using PureStore.Application.Interfaces.Repositories;
 using PureStore.Application.Interfaces.Services;
 using PureStore.Domain.Entities;
@@ -70,6 +71,18 @@ namespace PureStore.Persistence.Services
             Downloading newStats = new() { applicationId = up.Id, DownloadTime = 0 };
 
             await _downloadingRepository.AddAsync(newStats);
+        }
+
+        public async ValueTask PublishFeedBack(FeedBackDTO feed)
+        {
+            Feedback feedback = (Feedback)feed;
+            var app = await _uploadedApplicationRepositoryAsync.FirstOrDefaultAsync(x => x.Id == feed.ApplicationId);
+            if (app is null)
+                throw new KeyNotFoundException("Unable to rate this application. Application not found!");
+
+            app.Feedbacks.Add(feedback);
+
+            await _uploadedApplicationRepositoryAsync.UpdateAsync(app);
         }
     }
 }

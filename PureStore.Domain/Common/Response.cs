@@ -24,6 +24,12 @@ public class Response<T>
         Message = Data;
     }
 
+    public Response(bool succeeded, string Data)
+    {
+        Succeeded = true;
+        Message = Data;
+    }
+
     public Response(T data, string meessage = "", string[]? errors = default)
     {
         Succeeded = true;

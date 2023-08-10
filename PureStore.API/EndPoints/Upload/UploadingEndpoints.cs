@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using PureStore.API.Abstractions;
+using PureStore.Application.DTOs.Feedbacks;
 using PureStore.Application.DTOs.UploadApps;
 using PureStore.Application.Features.Uploads.Commands;
 using PureStore.Application.Features.Uploads.Queries;
@@ -23,6 +24,8 @@ namespace PureStore.API.EndPoints.Upload
                 d.RequireAuthenticatedUser();
                 d.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
             });
+
+            baseGroup.MapPost("/send-feeback", PostFeedBack);
 
             baseGroup.MapDelete("/remove", DeleteApp).RequireAuthorization(d =>
             {
@@ -67,6 +70,13 @@ namespace PureStore.API.EndPoints.Upload
         public async ValueTask<IResult> GetListPaged(IMediator mediator, [FromQuery] int page, [FromQuery] int size)
         {
             var result = await mediator.Send(new GetPagedDataQuery(page, size));
+
+            return TypedResults.Ok(result);
+        }
+
+        public async ValueTask<IResult> PostFeedBack(IMediator mediator, [FromBody] FeedBackDTO feedBack)
+        {
+            var result = await mediator.Send(new RateAppCommand(feedBack));
 
             return TypedResults.Ok(result);
         }
