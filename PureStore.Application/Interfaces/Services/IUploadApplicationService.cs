@@ -12,4 +12,5 @@ public interface IUploadApplicationService
     ValueTask<UploadedApplication> DownloadAppAsync(string applicationId);
     ValueTask<IEnumerable<UploadedApplication>> GetAllAsync(int page, int pageSize);
     ValueTask PublishFeedBack(FeedBackDTO feed);
+    ValueTask<IEnumerable<UploadedApplication>> GetTheTwentyMostDownloadedAppAsync();
 }
