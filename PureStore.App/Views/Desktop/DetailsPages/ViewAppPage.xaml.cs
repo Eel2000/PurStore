@@ -6,6 +6,7 @@ namespace PureStore.App.Views.Desktop.DetailsPages;
 public partial class ViewAppPage : ContentPage
 {
     private ItemApp app;
+    private Upload _app;
 
     public ViewAppPage()
     {
@@ -28,10 +29,29 @@ public partial class ViewAppPage : ContentPage
 
         app = item;
 
-        AppBanner.Source = ImageSource.FromUri(new Uri(item.ImageUrl));
+        if (Uri.TryCreate(item.ImageUrl, UriKind.Absolute, out var uriResult) && uriResult.Scheme == Uri.UriSchemeHttps)
+            AppBanner.Source = ImageSource.FromUri(uriResult);
 
         LblTitle.Text = item.Title;
         LblpubDate.Text = "Published: " + item.PublicationDate.ToString("d");
+        lblDescription.Text = item.Description;
+
+        rating.Value = item.Rating;
+    }
+
+    public ViewAppPage(Upload item, ViewAppPageViewModel viewModel)
+    {
+        InitializeComponent();
+
+        BindingContext = viewModel;
+
+        _app = item;
+
+        if (Uri.TryCreate(item.ImageUrl, UriKind.Absolute, out var uriResult) && uriResult.Scheme == Uri.UriSchemeHttps)
+            AppBanner.Source = ImageSource.FromUri(uriResult);
+
+        LblTitle.Text = item.Title;
+        LblpubDate.Text = "Published: " + item.Uploaded.ToString("d");
         lblDescription.Text = item.Description;
 
         rating.Value = item.Rating;

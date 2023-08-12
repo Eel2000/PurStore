@@ -12,6 +12,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PureStore.API", "PureStore.API\PureStore.API.csproj", "{068C9115-4A7D-4577-9637-9EED3EA0A584}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PureStore.App", "PureStore.App\PureStore.App.csproj", "{B034F9BD-2FF7-45A7-B42F-435391BF6A21}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B1FCD695-F6AC-4D69-900A-ADC87D13B724} = {B1FCD695-F6AC-4D69-900A-ADC87D13B724}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Medias", "Medias", "{A108C594-54AA-48C8-B613-59BA11B53B40}"
 EndProject
@@ -19,13 +22,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{3C9E507E-8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PureStore.Test", "PureStore.Test\PureStore.Test.csproj", "{3C06D4F4-8E98-4292-80A1-7E50759960EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PureStore.Application", "PureStore.Application\PureStore.Application.csproj", "{474BC131-311C-4DC9-91FB-C05A91BFC9E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PureStore.Application", "PureStore.Application\PureStore.Application.csproj", "{474BC131-311C-4DC9-91FB-C05A91BFC9E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{2907CF1A-462F-49DC-B9F6-133A77EEC2FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PureStore.Domain", "PureStore.Domain\PureStore.Domain.csproj", "{B1FCD695-F6AC-4D69-900A-ADC87D13B724}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PureStore.Domain", "PureStore.Domain\PureStore.Domain.csproj", "{B1FCD695-F6AC-4D69-900A-ADC87D13B724}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PureStore.Persistence", "PureStore.Persistence\PureStore.Persistence.csproj", "{4A7348D9-0981-487C-A642-6A7C398533BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PureStore.Persistence", "PureStore.Persistence\PureStore.Persistence.csproj", "{4A7348D9-0981-487C-A642-6A7C398533BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

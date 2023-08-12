@@ -1,11 +1,9 @@
-﻿using PureStore.App.Extensions;
+﻿using Newtonsoft.Json;
+using PureStore.App.Extensions;
 using PureStore.App.Models;
 using PureStore.App.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PureStore.Domain.Common;
+using PureStore.Domain.Entities;
 
 namespace PureStore.App.Services
 {
@@ -27,9 +25,12 @@ namespace PureStore.App.Services
             "https://wallpaper.dog/large/10698945.jpg",
         };
 
-        public UploadingService()
+        private readonly HttpClient _http;
+
+        public UploadingService(HttpClient http = null)
         {
             InitializData();
+            _http = http;
         }
 
         private void InitializData()
@@ -40,7 +41,7 @@ namespace PureStore.App.Services
             {
                 var newApp = new Upload()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.NewGuid().ToString(),
                     Title = Path.GetRandomFileName(),
                     Author = "Guidance show",
                     Size = 5.6f,
@@ -59,5 +60,25 @@ namespace PureStore.App.Services
         }
 
         public async ValueTask<IEnumerable<Upload>> GetUploadedApplications() => _uploads;
+
+        public async ValueTask<Response<IEnumerable<Upload>>> GetMostDownloadedAsync()
+        {
+            var req = await _http.GetAsync("https://localhost:44313/api/Uploading/most-downloaded");
+            if (req.IsSuccessStatusCode)
+            {
+                var response = await req.Content.ReadAsStringAsync();
+                var raw = JsonConvert.DeserializeObject<Response<IEnumerable<UploadedApplication>>>(response);
+
+                var data = new List<Upload>();
+                foreach (var item in raw.Data)
+                {
+                    data.Add(item);
+                }
+
+                return new Response<IEnumerable<Upload>>(raw.Succeeded.Value, data, raw.Message);
+            }
+
+            return new Response<IEnumerable<Upload>>();
+        }
     }
 }

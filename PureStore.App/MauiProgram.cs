@@ -52,8 +52,9 @@ namespace PureStore.App
             //---------------Services----------------------//
             builder.Services.AddSingleton<IStoreService, StoreService>();
             builder.Services.AddSingleton<IDownloadService, DownloadService>();
-            builder.Services.AddSingleton<IUploadingService, UploadingService>();
+            builder.Services.AddHttpClient<IUploadingService, UploadingService>(a => a.BaseAddress = new Uri("https://localhost:44313/api/Uploading"));
             //--------------------------------------------//
+
             #endregion
 
             return builder.Build();
