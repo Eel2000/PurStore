@@ -49,6 +49,15 @@ public class GenericRepositoryAsync<T> : IGenericRepositoryAsync<T> where T : cl
              .ToListAsync();
     }
 
+    //public async Task<IEnumerable<T>> GetOrderedSizedAsync(Expression<Func<T, bool>> expression, int size)
+    //{
+    //    return await _collection
+    //        .AsQueryable()
+    //        .OrderByDescending(expression)
+    //        .Take(size)
+    //        .ToListAsync();
+    //}
+
     public async Task<IEnumerable<T>> ToListAsync(Expression<Func<T, bool>> expression)
     {
         return _collection.Find(expression).ToList();

@@ -13,4 +13,5 @@ public interface IGenericRepositoryAsync<T> where T : class
     Task DeleteAsync(Expression<Func<T, bool>> expression);
     Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> expression);
     Task<IEnumerable<T>> ToListAsync(Expression<Func<T, bool>> expression);
+    //Task<IEnumerable<T>> GetOrderedSizedAsync(Expression<Func<T, bool>> expression, int size);
 }

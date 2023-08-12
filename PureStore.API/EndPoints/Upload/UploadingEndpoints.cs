@@ -17,6 +17,8 @@ namespace PureStore.API.EndPoints.Upload
 
             baseGroup.MapGet("/applications", GetListApp);
 
+            baseGroup.MapGet("/most-downloaded", GetMostDownloadedApp);
+
             baseGroup.MapGet("/download", GetDownload);
 
             baseGroup.MapPost("/Upload", UploadAppPost).RequireAuthorization(d =>
@@ -77,6 +79,13 @@ namespace PureStore.API.EndPoints.Upload
         public async ValueTask<IResult> PostFeedBack(IMediator mediator, [FromBody] FeedBackDTO feedBack)
         {
             var result = await mediator.Send(new RateAppCommand(feedBack));
+
+            return TypedResults.Ok(result);
+        }
+
+        public async ValueTask<IResult> GetMostDownloadedApp(IMediator mediator)
+        {
+            var result = await mediator.Send(new GetMostDownloadedAppQuery());
 
             return TypedResults.Ok(result);
         }

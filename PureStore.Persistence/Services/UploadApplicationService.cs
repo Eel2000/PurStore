@@ -84,5 +84,23 @@ namespace PureStore.Persistence.Services
 
             await _uploadedApplicationRepositoryAsync.UpdateAsync(app);
         }
+
+        public async ValueTask<IEnumerable<UploadedApplication>> GetTheTwentyMostDownloadedAppAsync()
+        {
+            var downloading = await _downloadingRepository.GetTheMostDownloadedAsync();
+            if (!downloading.Any())
+                return Enumerable.Empty<UploadedApplication>();
+
+            var data = new List<UploadedApplication>();
+
+            foreach (var download in downloading)
+            {
+                var app = await _uploadedApplicationRepositoryAsync.FirstOrDefaultAsync(x => x.Id == download.applicationId);
+                if (app != null)
+                    data.Add(app);
+            }
+
+            return Enumerable.DefaultIfEmpty(data);
+        }
     }
 }
