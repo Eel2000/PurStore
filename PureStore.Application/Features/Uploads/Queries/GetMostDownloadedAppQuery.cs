@@ -21,6 +21,7 @@ namespace PureStore.Application.Features.Uploads.Queries
         public async Task<Response<IEnumerable<UploadedApplication>>> Handle(GetMostDownloadedAppQuery request, CancellationToken cancellationToken)
         {
             var data = await _uploadApplicationService.GetTheTwentyMostDownloadedAppAsync();
+
             return new Response<IEnumerable<UploadedApplication>>(data);
         }
     }
