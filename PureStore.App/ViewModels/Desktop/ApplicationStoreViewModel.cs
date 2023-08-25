@@ -30,12 +30,25 @@ public partial class ApplicationStoreViewModel : ObservableObject
     }
 
     [ObservableProperty]
-    private ObservableCollection<ItemApp> _apps;
+    private ObservableCollection<Upload> _apps;
 
 
     private async void LoadAppsDownloaded()
     {
-        Apps = new(await _storeService.GetAsync());
+
+        try
+        {
+            var api = await _storeService.GetUploads();
+            if (api.Succeeded.Value)
+            {
+                var da = api.Data;
+                Apps = new(da.ToList());
+            }
+        }
+        catch (Exception)
+        {
+
+        }
     }
 
     [RelayCommand]
@@ -43,7 +56,7 @@ public partial class ApplicationStoreViewModel : ObservableObject
     {
         try
         {
-            Shell.Current.Navigation.PushModalAsync(new ViewAppPage(arg as ItemApp, _viewAppPageViewModel), true);
+            Shell.Current.Navigation.PushModalAsync(new ViewAppPage(arg as Upload, _viewAppPageViewModel), true);
             return Task.CompletedTask;
         }
         catch (Exception)
@@ -58,10 +71,10 @@ public partial class ApplicationStoreViewModel : ObservableObject
         try
         {
             var data = await _storeService.GetItemApps(12);
-            foreach (var item in data)
-            {
-                Apps.Add(item);
-            }
+            //foreach (var item in data)
+            //{
+            //    Apps.Add(item);
+            //}
 
         }
         catch (Exception ex)
@@ -79,7 +92,7 @@ public partial class ApplicationStoreViewModel : ObservableObject
             {
                 string str = arg.ToString();
                 var requested = await _storeService.GetAsync(str);
-                Apps = new(requested);
+                //Apps = new(requested);
             }
             else
             {
