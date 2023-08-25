@@ -45,6 +45,9 @@ public partial class ViewAppPage : ContentPage
 
         BindingContext = viewModel;
 
+
+        viewModel._feedBacks = new(item.FeedBacks);
+
         _app = item;
 
         if (Uri.TryCreate(item.ImageUrl, UriKind.Absolute, out var uriResult) && uriResult.Scheme == Uri.UriSchemeHttps)
