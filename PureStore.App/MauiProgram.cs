@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using PureStore.App.DataBase;
 using PureStore.App.Services;
 using PureStore.App.Services.Interfaces;
 using PureStore.App.ViewModels;
@@ -50,6 +51,9 @@ namespace PureStore.App
 
 
             //---------------Services----------------------//
+
+            builder.Services.AddTransient<LocalDatabaseService>();
+
             builder.Services.AddSingleton<IStoreService, StoreService>();
             builder.Services.AddSingleton<IDownloadService, DownloadService>();
             builder.Services.AddHttpClient<IUploadingService, UploadingService>(a => a.BaseAddress = new Uri("https://localhost:44313/api/Uploading"));
