@@ -80,5 +80,25 @@ namespace PureStore.App.Services
 
             return new Response<IEnumerable<Upload>>();
         }
+
+        public async ValueTask<Response<IEnumerable<Upload>>> GetAppsAsyc(int size = 20)
+        {
+            var req = await _http.GetAsync("https://localhost:44313/api/Uploading/applications");
+            if (req.IsSuccessStatusCode)
+            {
+                var response = await req.Content.ReadAsStringAsync();
+                var raw = JsonConvert.DeserializeObject<Response<IEnumerable<UploadedApplication>>>(response);
+
+                var data = new List<Upload>();
+                foreach (var item in raw.Data)
+                {
+                    data.Add(item);
+                }
+
+                return new Response<IEnumerable<Upload>>(raw.Succeeded.Value, data, raw.Message);
+            }
+
+            return new Response<IEnumerable<Upload>>();
+        }
     }
 }

@@ -38,4 +38,21 @@ public class Upload
             FeedBacks = application.Feedbacks ?? new Collection<Feedback>()
         };
     }
+
+    //public static explicit operator ItemApp(Upload application)
+    //{
+    //    return new()
+    //    {
+    //        Id = application.Id,
+    //        ImageUrl = application.ImageUrl,
+    //        Title = application.Title,
+    //        Description = application.Description,
+    //        Author = application.Author,
+    //        DownloadUrl = application.AppUrl,
+    //        AverageOldYear = application.AverageOldYear,
+    //        Size = application.Size,
+    //        Rating = application.FeedBacks.Any() ? application.FeedBacks.Average(x => x.Rating) : 0,
+    //        Feedbacks = application.FeedBacks ?? new Collection<Feedback>()
+    //    };
+    //}
 }

@@ -37,7 +37,7 @@ public class DownloadService : IDownloadService
         {
             var newApp = new ItemApp()
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.NewGuid().ToString(),
                 Title = Path.GetRandomFileName(),
                 Author = "Guidance show",
                 Size = 5.6f,

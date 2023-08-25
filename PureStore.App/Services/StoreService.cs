@@ -1,5 +1,8 @@
-﻿using PureStore.App.Models;
+﻿using Newtonsoft.Json;
+using PureStore.App.Models;
 using PureStore.App.Services.Interfaces;
+using PureStore.Domain.Common;
+using PureStore.Domain.Entities;
 
 namespace PureStore.App.Services;
 
@@ -21,10 +24,12 @@ public class StoreService : IStoreService
         "https://wallpaper.dog/large/10698945.jpg",
     };
 
+    private readonly HttpClient _httpClient;
 
-    public StoreService()
+    public StoreService(HttpClient httpClient)
     {
         InitializData();
+        _httpClient = httpClient;
     }
 
     public async ValueTask<IEnumerable<ItemApp>> GetAsync(string key)
@@ -38,6 +43,26 @@ public class StoreService : IStoreService
         return itemApps;
     }
 
+    public async ValueTask<Response<IEnumerable<Upload>>> GetUploads()
+    {
+        var req = await _httpClient.GetAsync("https://localhost:44313/api/Uploading/applications");
+        if (req.IsSuccessStatusCode)
+        {
+            var response = await req.Content.ReadAsStringAsync();
+            var raw = JsonConvert.DeserializeObject<Response<IEnumerable<UploadedApplication>>>(response);
+
+            var data = new List<Upload>();
+            foreach (var item in raw.Data)
+            {
+                data.Add(item);
+            }
+
+            return new Response<IEnumerable<Upload>>(raw.Succeeded.Value, data, raw.Message);
+        }
+
+        return new Response<IEnumerable<Upload>>();
+    }
+
     public async ValueTask<IEnumerable<ItemApp>> GetItemApps(int number)
         => itemApps.Skip(number).Take(number).ToList();
 
@@ -49,7 +74,7 @@ public class StoreService : IStoreService
         {
             var newApp = new ItemApp()
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.NewGuid().ToString(),
                 Title = "App #" + i,
                 Author = "Guidance show",
                 Size = 5.6f,
